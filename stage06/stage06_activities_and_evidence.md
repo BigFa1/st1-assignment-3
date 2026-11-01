@@ -103,7 +103,7 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Feature branch: feature/patient-lookup
 - Changed behaviour: The system can now find a registered patient by ID and return the same stored patient. It raises LookupError for unknown IDs and ValueError for invalid IDs.
 - Meaningful commits: [ba748368bf8cfd948f3f9663fe07c9ad35e54ef1]
-- Test command, directory and observed result: python -m pytest in project, all 13 tests past
+- Test command, directory and observed result: python -m pytest in project, all 13 tests passed.
 - Another-member reviewer: MohammedAboset 
 - Human observations recorded before Copilot: I reviewed the patient lookup implementation and checked the five new tests. The code uses the existing data store, returns the registered patient and raises LookupError for unknown IDs. I found no unrelated changes in the pull request. 
 - Requirement, responsibilities, test assertions and unrelated-scope checks: The implementation addresses FR-02 Patient Search. The five tests check existing patients, spaces around IDs, unknown IDs, invalid IDs and case sensitivity. 
@@ -111,10 +111,10 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Author response/change and verification: No changes were requested during my review. 
 - Reviewer recheck and approval: I reviewed the code changes, ran all 13 tests successfully and approved pull request #4 on GitHub.
 - Merge outcome and SHA: Not marge yet 
-- Significant Copilot assistance: - Significant Copilot assistance: Mohammed used GitHub Copilot Chat to review Pull Request #4 after completing his human review. Copilot confirmed the FR-02 requirements and suggested additional tests for whitespace-only and non-string IDs. The suggestions were checked against the existing code and test results. No code changes were made based on these suggestions.
-- Linked issue closure: [response]
-- Each member updated main: [member and confirmation]
-- Integrated verification after merge: [command, directory, result and code SHA]
+- Significant Copilot assistance: Mohammed used GitHub Copilot Chat to review Pull Request #4 after completing his human review. Copilot confirmed the FR-02 requirements and suggested additional tests for whitespace-only and non-string IDs. The suggestions were checked against the existing code and test results. No code changes were made based on these suggestions.
+- Linked issue closure: pending 
+- Each member updated main: pending 
+- Integrated verification after merge: pending
 
 ## H Copilot collaboration record
 
