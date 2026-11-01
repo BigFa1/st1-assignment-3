@@ -103,15 +103,15 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Feature branch: feature/patient-lookup
 - Changed behaviour: The system can now find a registered patient by ID and return the same stored patient. It raises LookupError for unknown IDs and ValueError for invalid IDs.
 - Meaningful commits: [ba748368bf8cfd948f3f9663fe07c9ad35e54ef1]
-- Test command, directory and observed result: py -m pytest in project, all 13 tests past
-- Another-member reviewer: MohammadAboset 
-- Human observations recorded before Copilot: Pending, awaiting Mohammed 
-- Requirement, responsibilities, test assertions and unrelated-scope checks: FR-02 Patient Search implementation completed. ,PatientService uses the shared data store to find patients. ,Five patient search tests passed. ,Pending confirmation from Mohammed's review of the PR diff.
-- Key feedback: awaiting Mohammed 
-- Author response/change and verification: Awaiting reviewer
-- Reviewer recheck and approval: Awaiting Mohammed review and approval
+- Test command, directory and observed result: python -m pytest in project, all 13 tests past
+- Another-member reviewer: MohammedAboset 
+- Human observations recorded before Copilot: I reviewed the patient lookup implementation and checked the five new tests. The code uses the existing data store, returns the registered patient and raises LookupError for unknown IDs. I found no unrelated changes in the pull request. 
+- Requirement, responsibilities, test assertions and unrelated-scope checks: The implementation addresses FR-02 Patient Search. The five tests check existing patients, spaces around IDs, unknown IDs, invalid IDs and case sensitivity. 
+- Key feedback: The implementation looked correct, and all 13 tests passed when I ran python -m pytest. 
+- Author response/change and verification: No changes were requested during my review. 
+- Reviewer recheck and approval: I reviewed the code changes, ran all 13 tests successfully and approved pull request #4 on GitHub.
 - Merge outcome and SHA: Not marge yet 
-- Significant Copilot assistance: [summary or none]
+- Significant Copilot assistance: - Significant Copilot assistance: Mohammed used GitHub Copilot Chat to review Pull Request #4 after completing his human review. Copilot confirmed the FR-02 requirements and suggested additional tests for whitespace-only and non-string IDs. The suggestions were checked against the existing code and test results. No code changes were made based on these suggestions.
 - Linked issue closure: [response]
 - Each member updated main: [member and confirmation]
 - Integrated verification after merge: [command, directory, result and code SHA]
@@ -120,24 +120,24 @@ Repeat this block per PR. Record actual events, not planned approvals.
 
 Record meaningful required use, not every trivial completion. Repeat per significant interaction.
 
-- Member and task: [response]
-- Prompt/purpose and relevant issue/diff: [response]
-- Summary of output: [response]
-- Human check against actual code, requirements and tests: [response]
-- Decision — Accept / Modify / Reject: [select]
-- Reason: [response]
-- Verification/evidence: [link and result]
+- Member and task: Mohammed Aboset - Review of FR-02 Patient Search, Pull Request #4.
+- Prompt/purpose and relevant issue/diff: Asked GitHub Copilot to review PatientService.find_patient(), check the FR-02 requirements, examine the five tests and identify possible problems in Pull Request #4. 
+- Summary of output: Copilot confirmed that the implementation meets FR-02. It suggested additional tests for whitespace-only IDs and non-string inputs. It also identified the Stage 6 documentation as a separate change in the pull request.
+- Human check against actual code, requirements and tests: I compared Copilot's findings with my earlier code review and test results. I had already confirmed that all 13 tests passed. Copilot's suggested edge-case tests would provide additional coverage.
+- Decision — Accept / Modify / Reject: Accept the review findings as feedback. The suggested additional tests are optional improvements and have not been implemented. 
+- Reason: Copilot's findings were consistent with the reviewed implementation and identified useful additional test cases. 
+- Verification/evidence: GitHub pull Request #4 - https://github.com/BigFa1/st1-assignment-3/pull/4. Human testing: python -m pytest from the project directory, 13 tests passed. GitHub Copilot Chat response reviewed seperately. 
 
 ## I Human versus Copilot review comparison
 
-- Human reviewer noticed before consulting Copilot: [response]
-- Copilot noticed: [response]
-- Overlap: [response]
-- What did the human reviewer notice that Copilot did not: [response]
-- What did Copilot identify that the human reviewer initially missed: [response]
-- Unsupported or incorrect Copilot suggestion: [response or none identified with explanation]
-- Human judgement accepted, modified or rejected, and why: [response]
-- Which evidence justified merge approval: [response]
+- Human reviewer noticed before consulting Copilot: I checked that the patient lookup implementation used the existing data store, returned registered patients and handled unknown IDs. I reviewed the five tests and confirmed that all 13 tests passed. 
+- Copilot noticed: Copilot confirmed the FR-02 requirements and suggested additional tests for whitespace-only IDs and non-string inputs. It also identified the Stage 6 documentation as a separate change. 
+- Overlap: Both reviews found that the patient lookup implementation met the main FR-02 requirements and that the five tests covered the required scenarios.
+- What did the human reviewer notice that Copilot did not: I personally ran the test suite and confirmed that all 13 tests passed. Copilot reviewed the code but did not independently execute the tests in the response provided.
+- What did Copilot identify that the human reviewer initially missed: Copilot suggested testing whitespace-only IDs and non-string inputs. It also identified the documentation changes in the pull request.
+- Unsupported or incorrect Copilot suggestion: No clearly incorrect suggestion was identified. The additional tests were useful recommendations rather than evidence of a failing implementation.
+- Human judgement accepted, modified or rejected, and why: I accepted Copilot's findings as useful feedback. The implementation passed the existing tests, and the suggested additional tests could strengthen coverage.
+- Which evidence justified merge approval: My review of the code and five new tests, the FR-02 acceptance criteria, and the successful result of 13 pytest tests. My approval was submitted before consulting Copilot.
 
 ## J Contributions
 
@@ -151,6 +151,15 @@ Repeat per member. Include only categories that describe actual work; write not 
 - Design and responsibility discussion: Used the existing SmartCareDataStore lookup method and kept the change focused on PatientService.
 - Debugging or integration: Corrected a Git file-path error during staging. Integration into main is pending.
 - Documentation or team support: Completed the initial Stage 6 activities and recorded Patient Search PR evidence.
+
+- Member: Mohammed Aboset, @MohammedAboset
+- Implementation: Not applicable. My contribution focused on reviewing and testing.
+- Testing: Ran python -m pytest from the project folder and confirmed all 13 tests passed.
+- Review: Reviewed the patient lookup code and five tests. Approved Pull Request #4 on GitHub.
+- Issue refinement: Not applicable.
+- Design and responsibility discussion: Checked that PatientService uses the existing data store and follows FR-02 requirements.
+- Debugging or integration: Installed pytest to run the tests successfully.
+- Documentation or team support: Recorded my review findings and compared them with GitHub Copilot's suggestions.
 
 ## K Exit question
 
