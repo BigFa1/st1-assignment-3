@@ -1,5 +1,6 @@
 import pytest
-
+from datetime import datetime
+from smartcare.services import PractitionerService, AppointmentService
 from smartcare.data_store import SmartCareDataStore
 from smartcare.services import PatientService
 from datetime import datetime
@@ -96,3 +97,54 @@ def test_cancel_appointment_errors():
 
     with pytest.raises(ValueError):
         service.cancel_appointment("")
+
+def test_practitioner_booking_conflict_preserves_original():
+    store = SmartCareDataStore()
+    patients = PatientService(store)
+    practitioners = PractitionerService(store)
+    appointments = AppointmentService(store)
+
+    patients.register_patient("P1", "Ahmed")
+    practitioners.register_practitioner("DR1", "Sara", "GP")
+
+    booking_time = datetime(2026, 10, 1, 9)
+    original = appointments.book_appointment(
+        "A1", "P1", "DR1", booking_time
+    )
+
+    with pytest.raises(ValueError):
+        appointments.book_appointment(
+            "A2", "P1", "DR1", booking_time
+        )
+
+    assert appointments.find_appointment("A1") is original
+
+    with pytest.raises(LookupError):
+        appointments.find_appointment("A2")
+
+
+def test_cancelled_booking_frees_practitioner_slot():
+    store = SmartCareDataStore()
+    patients = PatientService(store)
+    practitioners = PractitionerService(store)
+    appointments = AppointmentService(store)
+
+    patients.register_patient("P1", "Ahmed")
+    practitioners.register_practitioner("DR1", "Sara", "GP")
+
+    booking_time = datetime(2026, 10, 1, 9)
+
+    original = appointments.book_appointment(
+        "A1", "P1", "DR1", booking_time
+    )
+
+    appointments.cancel_appointment("A1")
+
+    new_booking = appointments.book_appointment(
+        "A2", "P1", "DR1", booking_time
+    )
+
+    assert original.status is AppointmentStatus.CANCELLED
+    assert new_booking.status is AppointmentStatus.SCHEDULED
+    assert appointments.find_appointment("A1") is original
+    assert appointments.find_appointment("A2") is new_booking
