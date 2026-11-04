@@ -212,24 +212,25 @@ A change is not complete just because the code works. It must meet the requireme
 ## M Completion and handover
 
 - Starting SHA: 61b3457
-- Final Stage 6 code SHA: eccca471616e3d83ddd35865930f8f8f85a5f9fe
+- Final Stage 6 code SHA: c50dbdcdc1185ba2765bf8d120ce511cff5b011a
 - Test command: py -m pytest
 - Working directory: project/
 - Observed result: 17 tests passed (8 original, 5 patient search, 4 new Stage 6 tests).
 - PR and another-member reviewer: https://github.com/BigFa1/st1-assignment-3/pull/4#issue-6056505414 Reviewer: Mohammed Aboset, https://github.com/BigFa1/st1-assignment-3/pull/6#issue-6191626545 , Reviewer: Mohammed Aboset
-- Unresolved issue or none: [response]
-- Stage 7 handover status: [ready for tutor checkpoint / unresolved work]
+- Unresolved issue or none: none
+- Stage 7 handover status: ready for tutor checkpoint.
 - Final submitted SHA if later than tested SHA: [response and evidence-only difference]
 
 - [x] Three Stage 6 service targets completed and checked.
 - [x] Original supplied tests retained and passing.
 - [x] At least two focused issues link requirements and acceptance criteria.
-- [] Feature work reviewed by another member using the actual diff.
+- [x] Feature work reviewed by another member using the actual diff.
 - [x] Human-first review and required Copilot comparison recorded.
-- [] Feedback resolved and approval recorded before merge.
-- [ ] Everyone pulled main and integrated checks passed.
-- [] Required activities, quiz responses and contribution notes completed.
+- [x] Feedback resolved and approval recorded before merge.
+- [x] Everyone pulled main and integrated checks passed.
+- [x] Everyone pulled main and integrated checks passed.
+- [x] Required activities, quiz responses and contribution notes completed.
 - [x] Only synthetic data included; confidential peer material kept out.
-- [ ] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
+- [x] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
 
 Do not write a file's own future commit SHA into that file. Record the tested code SHA first, then commit the evidence; explain the difference when submitting.
