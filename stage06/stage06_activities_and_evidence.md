@@ -227,7 +227,8 @@ A change is not complete just because the code works. It must meet the requireme
 - [x] Feature work reviewed by another member using the actual diff.
 - [x] Human-first review and required Copilot comparison recorded.
 - [x] Feedback resolved and approval recorded before merge.
-- [] Everyone pulled main and integrated checks passed.
+- [x] Everyone pulled main and integrated checks passed.
+- [x] Everyone pulled main and integrated checks passed.
 - [x] Required activities, quiz responses and contribution notes completed.
 - [x] Only synthetic data included; confidential peer material kept out.
 - [x] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
