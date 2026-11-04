@@ -110,7 +110,7 @@ Repeat this block per PR. Record actual events, not planned approvals.
 - Key feedback: The implementation looked correct, and all 13 tests passed when I ran python -m pytest. 
 - Author response/change and verification: No changes were requested during my review. 
 - Reviewer recheck and approval: I reviewed the code changes, ran all 13 tests successfully and approved pull request #4 on GitHub.
-- Merge outcome and SHA: Not marge yet 
+- Merge outcome and SHA: PR #4 merged into main (merge commit 3ec02a1). 
 - Significant Copilot assistance: Mohammed used GitHub Copilot Chat to review Pull Request #4 after completing his human review. Copilot confirmed the FR-02 requirements and suggested additional tests for whitespace-only and non-string IDs. The suggestions were checked against the existing code and test results. No code changes were made based on these suggestions.
 - Linked issue closure: pending 
 - Each member updated main: pending 
@@ -144,13 +144,13 @@ Record meaningful required use, not every trivial completion. Repeat per signifi
 Repeat per member. Include only categories that describe actual work; write not applicable where appropriate. Pairing or mentoring can be supported by a short corroborated note.
 
 - Member: Fahad Almajeed, @BigFa1
-- Implementation: PatientService.find_patient() on feature/patient-lookup. Commit: ba74836.
-- Testing: Added five patient search tests. Ran the full test suite and observed 13 passed.
-- Review: Inspected Git changes before committing. Another-member PR review is pending.
-- Issue refinement: Created GitHub issues for patient search, appointment cancellation and practitioner lookup.
-- Design and responsibility discussion: Used the existing SmartCareDataStore lookup method and kept the change focused on PatientService.
-- Debugging or integration: Corrected a Git file-path error during staging. Integration into main is pending.
-- Documentation or team support: Completed the initial Stage 6 activities and recorded Patient Search PR evidence.
+- Implementation: Implemented PatientService.find_patient(), PractitionerService.find_practitioner(), and AppointmentService.cancel_appointment().
+- Testing: Added five patient search tests and four new Stage 6 tests. Ran py -m pytest from project/. All 17 tests passed.
+- Review: Reviewed Git changes and approved Mohammed's PR #5. My PR #4 and #6 was approved by Mohammed
+- Issue refinement: Created GitHub issues #1, #2, and #3 with requirements and acceptance criteria for patient search, appointment cancellation, and practitioner lookup.
+- Design and responsibility discussion: Used existing data store methods for patient and practitioner lookup, and the Appointment domain method for cancellation to preserve appointment history.
+- Debugging or integration: Resolved Git issues, merged Patient Search through PR #4, and pushed the remaining Stage 6 services and tests through PR #6. All 17 tests passed.
+- Documentation or team support: Completed Stage 6 activities, documented test results, updated contribution evidence, and coordinated GitHub pull requests and reviews.
 
 - Member: Mohammed Aboset, @MohammedAboset
 - Implementation: Not applicable. My contribution focused on reviewing and testing.
@@ -211,25 +211,26 @@ A change is not complete just because the code works. It must meet the requireme
 
 ## M Completion and handover
 
-- Starting SHA: 
-- Final Stage 6 code SHA: [response]
-- Test command: [response]
-- Working directory: [response]
-- Observed result: [response]
-- PR and another-member reviewer: [links]
-- Unresolved issue or none: [response]
-- Stage 7 handover status: [ready for tutor checkpoint / unresolved work]
+- Starting SHA: 61b3457
+- Final Stage 6 code SHA: c50dbdcdc1185ba2765bf8d120ce511cff5b011a
+- Test command: py -m pytest
+- Working directory: project/
+- Observed result: 17 tests passed (8 original, 5 patient search, 4 new Stage 6 tests).
+- PR and another-member reviewer: https://github.com/BigFa1/st1-assignment-3/pull/4#issue-6056505414 Reviewer: Mohammed Aboset, https://github.com/BigFa1/st1-assignment-3/pull/6#issue-6191626545 , Reviewer: Mohammed Aboset
+- Unresolved issue or none: none
+- Stage 7 handover status: ready for tutor checkpoint.
 - Final submitted SHA if later than tested SHA: [response and evidence-only difference]
 
-- [ ] Three Stage 6 service targets completed and checked.
-- [ ] Original supplied tests retained and passing.
-- [ ] At least two focused issues link requirements and acceptance criteria.
-- [ ] Feature work reviewed by another member using the actual diff.
-- [ ] Human-first review and required Copilot comparison recorded.
-- [ ] Feedback resolved and approval recorded before merge.
-- [ ] Everyone pulled main and integrated checks passed.
-- [ ] Required activities, quiz responses and contribution notes completed.
-- [ ] Only synthetic data included; confidential peer material kept out.
-- [ ] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
+- [x] Three Stage 6 service targets completed and checked.
+- [x] Original supplied tests retained and passing.
+- [x] At least two focused issues link requirements and acceptance criteria.
+- [x] Feature work reviewed by another member using the actual diff.
+- [x] Human-first review and required Copilot comparison recorded.
+- [x] Feedback resolved and approval recorded before merge.
+- [x] Everyone pulled main and integrated checks passed.
+- [x] Everyone pulled main and integrated checks passed.
+- [x] Required activities, quiz responses and contribution notes completed.
+- [x] Only synthetic data included; confidential peer material kept out.
+- [x] Tutor can trace a requirement through issue, code, tests, PR and checkpoint.
 
 Do not write a file's own future commit SHA into that file. Record the tested code SHA first, then commit the evidence; explain the difference when submitting.
