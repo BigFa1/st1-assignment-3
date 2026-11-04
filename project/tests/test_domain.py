@@ -14,6 +14,10 @@ def test_blank_patient_id_is_rejected():
     with pytest.raises(ValueError):
         Patient(" ", "Ahmed")
 
+def test_whitespace_patient_name_is_rejected():
+    with pytest.raises(ValueError):
+        Patient("P1", "   ")
+
 
 def test_valid_practitioner_construction():
     doctor = Practitioner("DR1", "Sara", "GP")
