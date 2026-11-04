@@ -3,6 +3,7 @@
 Group/tutorial: Monday 9:30-11:30, Group 4  Members/cohorts: Member 1: Fahad Almajeed, BigFa1, UG. Member 2: Mohammed Aboset, MohammedAboset, UG
 Requirements baseline: SmartCare A3 Requirements Baseline 2026, revision 2.
 Use the same project/. Link actual evidence; keep responses concise. Blank fields are for your group. Copy rows only as needed.
+Repository URL: https://github.com/BigFa1/st1-assignment-3
 
 All Assignment 3 stage materials are provided from the beginning. Complete this stage only after the previous applicable stage has been integrated, verified and recorded. Use this supplied record in stage07/ in your EXISTING repository. Preserve project/, all earlier tests, records and responses. Do not download another starter or copy staff solutions.
 
@@ -242,9 +243,9 @@ Accepted / modified / rejected test decisions and evidence: Three GitHub Copilot
 
 Run python -m pytest from project/. Retain all accumulated tests. Record the tested SHA accurately.
 
-| Command          | Working directory | Code SHA                                                               | Passed | Failed | Failure summary | Product defect / test defect / unresolved | Evidence and interpretation                                                      |
-|------------------|-------------------|------------------------------------------------------------------------|--------|--------|-----------------|-------------------------------------------|----------------------------------------------------------------------------------|
-| python -m pytest | project/          | Uncommitted changes on feature/stage07-preparation (base SHA: b3d7faa) | 28     | 0      | No failures     | No failures observed                      | Independently ran all 28 tests after adding TEST-21. All passed in 0.02 seconds. |
+| Command          | Working directory | Code SHA | Passed | Failed | Failure summary | Product defect / test defect / unresolved | Evidence and interpretation                                                      |
+|------------------|-------------------|----------|--------|--------|-----------------|-------------------------------------------|----------------------------------------------------------------------------------|
+| python -m pytest | project/          | c8d9e3a  | 28     | 0      | No failures     | No failures observed                      | Independently ran all 28 tests after adding TEST-21. All passed in 0.02 seconds. |
 
 Individual test runs and changed-order independence evidence: The complete test suite was independently executed using python -m pytest, with all 28 tests passing in 0.02 seconds. Individual test runs and changed-order independence checks have not been performed, so no additional evidence is claimed.
 Optional tutor-led demonstration notes: 
@@ -311,8 +312,8 @@ Tests must be linked to real requirements, use meaningful assertions, and verify
 
 ## O Stage Completion
 
-Tested Stage 7 main SHA: The Stage 7 test implementation was merged into main through PR #8. The preparation branch was previously tested at commit b3d7faa with 27 passing tests. After adding TEST-21, the updated working tree was tested successfully with 28 passing tests. The final tested SHA will be recorded after committing and rerunning the tests.
-Full-suite result: Independently executed python -m pytest from project/ on feature/stage07-preparation. All 28 tests passed in 0.02 seconds, with 0 failures. The latest test run includes the newly added TEST-21.
+Tested Stage 7 main SHA: The Stage 7 test implementation was merged into main through PR #8. The preparation branch was independently tested at commit c8d9e3a. All 28 tests passed. The final tested main SHA will be recorded after the preparation branch is merged.
+Full-suite result: Independently executed python -m pytest from project/ on commit c8d9e3a. All 28 tests passed in 0.02 seconds, with 0 failures.
 Unresolved defects and effect on baseline: No failures or defects were observed during the full regression run. The current 28-test suite includes TEST-21 for whitespace-only patient name validation. Repeated cancellation is verified at domain level, but separate service-level verification has not been confirmed. No baseline changes were required to resolve test failures.
 Clean working tree and integration evidence: The Stage 7 test implementation was merged into main through PR #8. The preparation branch was successfully updated with origin/main without merge conflicts. The working tree was clean before the latest documentation and test edits. Final Git status verification, commit, PR review and merge are still pending.
 Stage 8 handover status: Pending — Stage 7 tests have passed, but the preparation documentation and additional test must be committed, reviewed and merged into main before final handover. No Stage 8 work has been assigned yet.
