@@ -249,43 +249,43 @@ Each member's substantive contribution and artefact: [complete]
 
 1. What should an engineer do before changing code in response to a failure?
 
-Response: [complete]
+Response: An engineer should reproduce the failure, check the requirements, inspect the traceback and test results, and investigate possible causes before changing code.
 
 2. Where should expected behaviour come from during debugging?
 
-Response: [complete]
+Response: Expected behaviour should come from the project requirements and acceptance criteria, not from assumptions or failing tests alone.
 
 3. What is a debugging hypothesis?
 
-Response: [complete]
+Response: A debugging hypothesis is a possible explanation for a failure that must be checked against evidence.
 
 4. What is a regression test and why is it retained?
 
-Response: [complete]
+Response: A regression test checks that a previously identified defect does not happen again. It is retained to detect the same problem if future code changes reintroduce it.
 
 5. What is meant by root cause?
 
-Response: [complete]
+Response: The root cause is the underlying problem responsible for a failure. Fixing it prevents the same defect from continuing.
 
 6. What is refactoring?
 
-Response: [complete]
+Response: Refactoring means improving the internal structure of code without intentionally changing its external behaviour.
 
 7. What is a swallowed exception?
 
-Response: [complete]
+Response: A swallowed exception happens when a program catches an error but ignores it without handling or reporting it properly. This can hide defects and make debugging difficult.
 
 8. What is a code smell?
 
-Response: [complete]
+Response: A code smell is a sign that code may be difficult to understand, maintain or improve. Examples include long methods, duplicated code and deeply nested conditions.
 
 9. How should GitHub Copilot-generated debugging diagnoses be treated?
 
-Response: [complete]
+Response: Copilot diagnoses should be treated as suggestions, not confirmed facts. Engineers must check them against the actual code, requirements and test evidence before accepting them.
 
 10. What is the Stage 8 engineering rule?
 
-Response: [complete]
+Response: Diagnose the failure using evidence, write a regression test that fails before the repair, make the smallest justified fix, confirm the test passes, and refactor separately while preserving behaviour.
 
 ## L. Completion and handover
 
