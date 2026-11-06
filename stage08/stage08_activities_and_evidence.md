@@ -72,7 +72,7 @@ Traceback — exception/assertion; expected/observed values; test line; call pat
 - Symptom / observed behaviour: The system allowed a second appointment for the same practitioner at the same date and time instead of rejecting it. The tests `test_practitioner_booking_conflict_preserves_original` and `test_conflict_rule_and_different_practitioner` failed because the expected `ValueError` was not raised.
 - Expected behaviour: The system must reject a second scheduled appointment for the same practitioner at the same date and time by raising a ValueError. Appointments for different practitioners at the same time must still be allowed.
 - Minimal synthetic reproduction steps: Create a practitioner and a patient, then schedule an appointment for that practitioner at a specific date and time. Attempt to schedule a second appointment for the same practitioner at the same date and time. The system should reject the second booking with a ValueError, but the prepared faulty version allows it.
-- Meaningful failing test path/name and exact relevant failure: Ran `python -m pytest -q` from `project/` on the prepared faulty branch `debug/stage08`. The tests `tests/test_services.py::test_practitioner_booking_conflict_preserves_original` and `tests/test_starter.py::test_conflict_rule_and_different_practitioner` failed with `Failed: DID NOT RAISE ValueError`. This shows that the system did not reject the conflicting appointment as expected.
+- Meaningful failing test path/name and exact relevant failure: Created `project/tests/test_regressions.py` with `test_f8_01_same_practitioner_double_booking`. Ran `python -m pytest tests/test_regressions.py::test_f8_01_same_practitioner_double_booking -v` from `project/`. Result: 1 failed in 0.03 seconds. The failure occurred at line 20 with `Failed: DID NOT RAISE ValueError`. This confirms that the faulty implementation does not reject a second appointment for the same practitioner at the same time. The existing tests `test_practitioner_booking_conflict_preserves_original` and `test_conflict_rule_and_different_practitioner` also demonstrated this defect.
 - Human hypothesis and intended checks: see E, F8-01.
 - Supported root cause and inspected code/runtime evidence: [complete after diagnosis]
 - Smallest justified fix / diff / why other behaviour is preserved: [complete]
@@ -80,10 +80,10 @@ Traceback — exception/assertion; expected/observed values; test line; call pat
 
 ## D. F8-02 diagnosis and repair
 
-- Symptom / observed behaviour: [complete]
-- Expected behaviour and requirement: [complete]
-- Minimal synthetic reproduction steps: [complete]
-- Meaningful failing test path/name and exact relevant failure: [complete]
+- Symptom / observed behaviour: After an appointment is cancelled, the system cannot retrieve it by its ID. The regression test confirmed that `store.find_appointment("A1")` returns `None` instead of the original appointment object.
+- Expected behaviour: Cancelling an appointment must change its status to CANCELLED without deleting it from storage. The appointment must remain retrievable by its ID, and the lookup must return the same original appointment object.
+- Minimal synthetic reproduction steps: Create a patient and practitioner, then book appointment A1. Cancel appointment A1 and attempt to retrieve it using store.find_appointment("A1"). The expected result is the original cancelled appointment, but the faulty version returns None.
+- Meaningful failing test path/name and exact relevant failure: Created `project/tests/test_regressions.py` with `test_f8_02_cancelled_appointment_still_retrievable`. Ran `python -m pytest tests/test_regressions.py::test_f8_02_cancelled_appointment_still_retrievable -v` from `project/`. Result: 1 failed in 0.03 seconds. The failure occurred at line 38 with `AssertionError: assert None is original`. The data store returned None instead of the original cancelled appointment. This confirms that cancelled appointments cannot be retrieved correctly in the prepared faulty version.
 - Human hypothesis and intended checks: see E, F8-02.
 - Supported root cause and inspected code/runtime evidence: [complete after diagnosis]
 - Smallest justified fix / diff / why other behaviour is preserved: [complete]
@@ -96,12 +96,12 @@ Complete both entries BEFORE Copilot. C/D supply observed/expected/reproduction/
 ### F8-01 human entry
 Likely cause and why plausible: The has_practitioner_conflict() method may be comparing practitioner IDs incorrectly. This is plausible because the existing tests show that the system allows two appointments for the same practitioner at the same date and time instead of raising ValueError.
 Evidence intended to inspect / competing explanation / discriminating check: Inspect the has_practitioner_conflict() method in project/smartcare/data_store.py and review the failing tests. Another possible cause is that the appointment date and time are compared incorrectly. Check whether the practitioner ID or date/time comparison explains the failure.
-Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. The human hypothesis and intended checks were documented in Section E before any GitHub Copilot consultation for Stage 8. A Git commit recording this evidence has not yet been created.
+Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. Human-first hypotheses and intended checks were recorded before GitHub Copilot consultation in commit `1cf05ca` on branch `debug/stage08`.
 
 ### F8-02 human entry
 Likely cause and why plausible: The find_appointment() method may be incorrectly excluding cancelled appointments when searching by appointment ID. This is plausible because the failing tests show that the system raises LookupError when attempting to retrieve an appointment after cancellation.
 Evidence intended to inspect / competing explanation / discriminating check: Inspect the find_appointment() method in project/smartcare/data_store.py and review the failing cancellation tests. Another possible cause is that the cancellation process deletes the appointment from storage. Check whether the appointment remains stored but is excluded by the lookup method, or whether it is actually removed during cancellation.
-Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. The human hypothesis and intended checks were documented in Section E before any GitHub Copilot consultation for Stage 8. A Git commit recording this evidence has not yet been created.
+Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. Human-first hypotheses and intended checks were recorded before GitHub Copilot consultation in commit `1cf05ca` on branch `debug/stage08`.
 
 ## F. GitHub Copilot prompts, findings and human decisions
 
@@ -123,16 +123,16 @@ Final human conclusion and comparison with initial hypothesis: [complete]
 
 ## G. Failing to passing regression evidence
 
-| Checkpoint | Code SHA or precise diff | Command and working directory | Actual result and artefact reference |
-|---|---|---|---|
-| F8-01 before repair | [complete] | [complete] | [complete] |
-| F8-01 after repair | [complete] | [complete] | [complete] |
-| F8-02 before repair | [complete] | [complete] | [complete] |
-| F8-02 after repair | [complete] | [complete] | [complete] |
-| Full suite after both repairs, before refactor | [complete] | [complete] | [complete] |
+| Checkpoint                                     | Code SHA or precise diff                                                                                  | Command and working directory                                                                                        | Actual result and artefact reference                                                                    |
+|------------------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| F8-01 before repair                            | Prepared faulty commit `058e614`; human-first evidence commit `1cf05ca`. No application repair performed. | `python -m pytest tests/test_regressions.py::test_f8_01_same_practitioner_double_booking -v` from `project/`.        | FAILED: `Failed: DID NOT RAISE ValueError` at `tests/test_regressions.py:20`. 1 failed in 0.03s.        |
+| F8-01 after repair                             | [complete]                                                                                                | [complete]                                                                                                           | [complete]                                                                                              |
+| F8-02 before repair                            | Prepared faulty commit `058e614`; human-first evidence commit `1cf05ca`. No application repair performed. | `python -m pytest tests/test_regressions.py::test_f8_02_cancelled_appointment_still_retrievable -v` from `project/`. | FAILED: `AssertionError: assert None is original` at `tests/test_regressions.py:38`. 1 failed in 0.03s. |
+| F8-02 after repair                             | [complete]                                                                                                | [complete]                                                                                                           | [complete]                                                                                              |
+| Full suite after both repairs, before refactor | [complete]                                                                                                | [complete]                                                                                                           | [complete]                                                                                              |
 
-Explain how the assertions detect each relevant incorrect result and protect previous behaviour: [complete]
-Unrelated failures investigated / resolution: [complete or not applicable with reason]
+Explain how the assertions detect each relevant incorrect result and protect previous behaviour: The F8-01 regression test uses pytest.raises(ValueError) to check that a second booking for the same practitioner at the same time is rejected. The F8-02 regression test checks that a cancelled appointment remains retrievable by its ID and that the returned object is the original appointment. These tests protect the existing booking conflict and cancellation requirements from being broken by future changes.
+Unrelated failures investigated / resolution: Not applicable at this stage. The initial full-suite run had 4 failures, all related to F8-01 or F8-02. The two new regression tests also failed for their expected defects. No unrelated failures have been observed so far. The full suite will be run again after both repairs to check for additional problems.
 
 ## H. Refactoring decision and before/after verification
 
