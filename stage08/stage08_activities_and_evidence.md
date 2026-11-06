@@ -241,9 +241,16 @@ Each member's substantive contribution and artefact: [complete]
 
 ## J. Required reflections
 
-1. Which Copilot diagnosis appeared convincing but lacked evidence? [complete; report honestly if none and discuss the least-supported real suggestion]
-2. What evidence changed your group's view? [complete]
-3. How did regression tests protect the refactoring? [complete]
+
+## J. Required reflections
+
+1. Which Copilot diagnosis appeared convincing but lacked evidence?
+Response: During F8-02, Copilot suggested possible causes for the cancelled appointment lookup failure. However, its suggestions were not supported by the faulty code because it inspected the Stage 7 main branch instead of the Stage 8 debugging branch. This showed that Copilot suggestions must be checked against the correct code and actual test evidence.
+2. What evidence changed your group's view?
+Response: The failing regression tests and code inspection helped identify the actual causes of F8-01 and F8-02. The evidence showed that the practitioner conflict comparison was incorrect and that cancelled appointments were being excluded from lookup. After repairing both defects, all 30 tests passed. This supported the debugging conclusions.
+3. How did regression tests protect the refactoring?
+Response: The two regression tests checked that the same practitioner could not be double-booked and that cancelled appointments remained retrievable. Both tests passed before and after the refactoring. The full suite of 30 tests also passed after the change, providing evidence that the refactoring preserved the tested behaviour.
+
 
 ## K. Ten formative questions
 
