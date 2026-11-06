@@ -136,13 +136,13 @@ Unrelated failures investigated / resolution: The initial full-suite run produce
 
 ## H. Refactoring decision and before/after verification
 
-Smell and exact location: [complete]
-Small proposed structural change / why justified: [complete before editing]
-External behaviour to preserve / relevant tests: [complete]
+Smell and exact location: The `book_appointment()` method in `project/smartcare/services.py`, inside `AppointmentService`, contains participant lookup and validation logic mixed with appointment creation and booking checks. This makes the method longer and gives it several responsibilities.
+Small proposed structural change / why justified: Extract the patient and practitioner lookup and missing-participant checks into a private helper method named `_get_booking_participants()`. The `book_appointment()` method will call this helper before creating the appointment. This improves readability and separates participant validation from booking logic without changing the required behaviour.
+External behaviour to preserve / relevant tests: The refactor must preserve patient and practitioner lookup, `LookupError` for missing participants, `ValueError` for invalid IDs, duplicate appointment IDs and practitioner conflicts, successful appointment creation, and the original stored objects. The existing tests in `tests/test_services.py` and `tests/test_starter.py`, together with the two regression tests in `tests/test_regressions.py`, will be used to check behaviour preservation.
 Before result: see G, full passing suite.
-Actual change / diff / separate refactor SHA: [complete]
-Focused and full after-refactor commands / working directory / results / evidence: [complete]
-Result — accepted, revised or rejected / reason / behaviour-preservation conclusion: [complete]
+Actual change / diff / separate refactor SHA: Added the private helper method `_get_booking_participants()` to `AppointmentService` in `project/smartcare/services.py`. Replaced the repeated patient and practitioner lookup and validation code in `book_appointment()` with a call to the helper. Reviewed the changes using `git --no-pager diff -- smartcare/services.py`. The refactoring was committed separately as `2d85ff2` (`Refactor appointment booking participant lookup`).
+Focused and full after-refactor commands / working directory / results / evidence: From the `project/` directory, ran `python -m pytest -v`. All 30 tests passed in 0.02 seconds, including both Stage 8 regression tests and the 28 existing tests. The terminal output and Git diff provide verification evidence.
+Result — accepted, revised or rejected / reason / behaviour-preservation conclusion: Accepted. The refactoring separates participant lookup and validation from appointment booking, improving readability without intentionally changing external behaviour. All 30 tests passed after the change, supporting behaviour preservation.
 
 ## I. Git, human review and integration
 
