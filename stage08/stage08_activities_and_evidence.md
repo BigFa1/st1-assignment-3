@@ -56,23 +56,23 @@ Traceback — exception/assertion; expected/observed values; test line; call pat
 
 ## B. Stage 7 baseline and safe preparation
 
-- Stage 7 code SHA and requirement baseline: [complete]
-- Baseline test command / working directory / observed result / evidence: [complete]
-- Clean preparation SHA if a record-only commit followed Stage 7: [complete]
-- Branch and preparer / how teammates obtained this branch: [complete]
-- Downloaded tool version, source SHA256 and --check outcome: [complete]
-- --apply and --verify output summaries / artefact references: [complete]
-- Bounded diff inspected and recovery location (not committed): [complete]
-- Prepared faulty-state commit SHA: [complete]
-- Preparation or recovery issues and resolution, if any: [complete]
-- Initial prepared full-suite command / result / key failures: [complete]
+- Stage 7 code SHA and requirement baseline: cb23711 (Stage 7 integrated into main through PR #9). Requirements baseline: SmartCare A3 Requirements Baseline 2026, revision 2. Existing SmartCare project and earlier tests preserved.
+- Baseline test command / working directory / observed result / evidence: Ran `python -m pytest` from `project/` at Stage 7 commit `c8d9e3a`. Result: 28 tests passed, 0 failed, in 0.02 seconds. Evidence: `stage07/stage07_activities_and_evidence.md`, Section G (test execution record) and completion summary. Stage 7 was subsequently merged into `main` at `cb23711`.
+- Clean preparation SHA if a record-only commit followed Stage 7: Not applicable. No separate record-only commit was identified between the Stage 7 integration commit `cb23711` and the Stage 8 preparation commit `058e614`.
+- Branch and preparer / how teammates obtained this branch: Stage 8 was prepared on branch `debug/stage08`. The preparation commit `058e614` was authored by Mohammed Aboset on 5 November 2026 at 14:54 +1100. The branch is available on `origin/debug/stage08`. Teammate branch retrieval has not yet been verified.
+- Downloaded tool version, source SHA256 and --check outcome: The local preparation record confirms tool version 1.1. The original utility file was not found in the searched directories, so its source SHA256 and the exact `--check` outcome could not be independently verified.
+- --apply and --verify output summaries / artefact references: The local `project/.stage8_faults/record.json` reports tool version 1.1 and status `prepared`. Git commit `058e614` contains the two intended changes in `project/smartcare/data_store.py`. The prepared test run produced 24 passed and 4 failed. The original `--apply` and `--verify` terminal outputs were not available, so their exact results could not be independently verified.
+- Bounded diff inspected and recovery location (not committed): Compared `cb23711` with `058e614` using `git --no-pager diff cb23711 058e614 -- smartcare/data_store.py`. Only `project/smartcare/data_store.py` changed, limited to `find_appointment()` and `has_practitioner_conflict()` (11 insertions, 18 deletions). Local recovery files are in `project/.stage8_faults/`: `data_store.before.py` and `record.json`. The metadata records tool version 1.1, baseline SHA256 `b4a1993e878c59a9df5e9055320702b2d318c5b6055bb1693a3afc25cd8fd375`, faulty SHA256 `6b57a2d7f69df15373aa954c6d5e7a9758dcdd2c7e187b25304eacf5e52d09ce`, and status `prepared`.
+- Prepared faulty-state commit SHA: 058e61401f57b3286558058ff3059b0438bd5509 (debug/stage08).
+- Preparation or recovery issues and resolution, if any: No preparation errors have been identified in the available evidence. The recovery folder was located at `project/.stage8_faults/` and contains `data_store.before.py` and `record.json`. Both files were confirmed excluded from Git using `git check-ignore -v`. The preparation record reports status `prepared`.
+- Initial prepared full-suite command / result / key failures: Ran `python -m pytest -q` from `project/` on branch `debug/stage08`, commit `058e61401f57b3286558058ff3059b0438bd5509`. Result: 24 passed, 4 failed (28 tests total). Two failures involved cancelled appointment lookup raising `LookupError`, and two involved same-practitioner booking conflicts not raising `ValueError`. The working tree was clean after the run.
 
 ## C. F8-01 diagnosis and repair
 
-- Symptom / observed behaviour: [complete]
-- Expected behaviour and requirement: [complete]
-- Minimal synthetic reproduction steps: [complete]
-- Meaningful failing test path/name and exact relevant failure: [complete]
+- Symptom / observed behaviour: The system allowed a second appointment for the same practitioner at the same date and time instead of rejecting it. The tests `test_practitioner_booking_conflict_preserves_original` and `test_conflict_rule_and_different_practitioner` failed because the expected `ValueError` was not raised.
+- Expected behaviour: The system must reject a second scheduled appointment for the same practitioner at the same date and time by raising a ValueError. Appointments for different practitioners at the same time must still be allowed.
+- Minimal synthetic reproduction steps: Create a practitioner and a patient, then schedule an appointment for that practitioner at a specific date and time. Attempt to schedule a second appointment for the same practitioner at the same date and time. The system should reject the second booking with a ValueError, but the prepared faulty version allows it.
+- Meaningful failing test path/name and exact relevant failure: Ran `python -m pytest -q` from `project/` on the prepared faulty branch `debug/stage08`. The tests `tests/test_services.py::test_practitioner_booking_conflict_preserves_original` and `tests/test_starter.py::test_conflict_rule_and_different_practitioner` failed with `Failed: DID NOT RAISE ValueError`. This shows that the system did not reject the conflicting appointment as expected.
 - Human hypothesis and intended checks: see E, F8-01.
 - Supported root cause and inspected code/runtime evidence: [complete after diagnosis]
 - Smallest justified fix / diff / why other behaviour is preserved: [complete]
@@ -94,14 +94,14 @@ Traceback — exception/assertion; expected/observed values; test line; call pat
 Complete both entries BEFORE Copilot. C/D supply observed/expected/reproduction/test; retain those initial facts and link them here.
 
 ### F8-01 human entry
-Likely cause and why plausible: [complete]
-Evidence intended to inspect / competing explanation / discriminating check: [complete]
-Member and saved sequence/time or commit showing this preceded consultation: [complete]
+Likely cause and why plausible: The has_practitioner_conflict() method may be comparing practitioner IDs incorrectly. This is plausible because the existing tests show that the system allows two appointments for the same practitioner at the same date and time instead of raising ValueError.
+Evidence intended to inspect / competing explanation / discriminating check: Inspect the has_practitioner_conflict() method in project/smartcare/data_store.py and review the failing tests. Another possible cause is that the appointment date and time are compared incorrectly. Check whether the practitioner ID or date/time comparison explains the failure.
+Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. The human hypothesis and intended checks were documented in Section E before any GitHub Copilot consultation for Stage 8. A Git commit recording this evidence has not yet been created.
 
 ### F8-02 human entry
-Likely cause and why plausible: [complete]
-Evidence intended to inspect / competing explanation / discriminating check: [complete]
-Member and saved sequence/time or commit showing this preceded consultation: [complete]
+Likely cause and why plausible: The find_appointment() method may be incorrectly excluding cancelled appointments when searching by appointment ID. This is plausible because the failing tests show that the system raises LookupError when attempting to retrieve an appointment after cancellation.
+Evidence intended to inspect / competing explanation / discriminating check: Inspect the find_appointment() method in project/smartcare/data_store.py and review the failing cancellation tests. Another possible cause is that the cancellation process deletes the appointment from storage. Check whether the appointment remains stored but is excluded by the lookup method, or whether it is actually removed during cancellation.
+Member and saved sequence/time or commit showing this preceded consultation: Mohammed Aboset. The human hypothesis and intended checks were documented in Section E before any GitHub Copilot consultation for Stage 8. A Git commit recording this evidence has not yet been created.
 
 ## F. GitHub Copilot prompts, findings and human decisions
 
