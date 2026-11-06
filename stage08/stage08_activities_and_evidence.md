@@ -21,38 +21,122 @@ For each, choose symptom, evidence or hypothesis/opinion, and explain your reaso
 - Traceback points to smartcare/services.py line 42 in the example.
 The example line number is illustrative; inspect the actual line in your run. The removal hypothesis must be tested against the current project, which has no public delete operation.
 
-Response and reason: [complete]
+
+Response and reason:
+
+1. "Appointment disappears after cancellation."
+   Classification: Symptom.
+   Reason: This describes the visible problem, but does not explain what caused it.
+2. "The data-store removal path is probably being called."
+   Classification: Hypothesis/opinion.
+   Reason: This suggests a possible cause without evidence. The current SmartCare project has no public delete operation, so this hypothesis must be checked rather than assumed.
+3. "The failing test shows store.find_appointment('A1') returns None."
+   Classification: Evidence.
+   Reason: This describes an observed test result that can be checked and reproduced.
+4. "The service layer is badly designed."
+   Classification: Hypothesis/opinion.
+   Reason: This is a judgement without specific supporting evidence and does not identify the actual defect.
+5. "Traceback points to smartcare/services.py line 42 in the example."
+   Classification: Evidence.
+   Reason: A traceback identifies where an error was reported. However, line 42 is only an illustrative example and does not prove the root cause.
+
 
 ### A.2 Build a debugging record
 Choose the cancelled-history scenario or a same-practitioner/time booking. Before changing code, record expected behaviour, observed behaviour, minimal reproduction, a hypothesis and evidence to inspect. Use a requirement to justify the expectation. Keep the initial hypothesis even if later evidence disproves it.
 
-Response and reason: [complete]
+
+Response and reason:
+Scenario: F8-02 — Cancelled appointment history cannot be retrieved.
+Expected behaviour: According to FR-07, cancelling an appointment must retain its record so it can still be found later.
+Observed behaviour: After cancelling appointment A1, the data-store lookup returned None, and the service lookup raised LookupError instead of returning the cancelled appointment.
+Minimal reproduction:
+1. Register patient P1 and practitioner DR1.
+2. Book appointment A1.
+3. Cancel appointment A1.
+4. Call store.find_appointment("A1") and appointments.find_appointment("A1").
+5. Observe that the cancelled appointment cannot be retrieved.
+Initial hypothesis: The appointment lookup method may be incorrectly filtering out cancelled appointments.
+Evidence to inspect: The failing regression test, its traceback, the find_appointment() method in smartcare/data_store.py, the appointment status after cancellation, and the FR-07 requirement.
+Conclusion: The hypothesis was supported. The faulty data-store lookup excluded cancelled appointments. Restoring the normal lookup allowed cancelled appointments to remain retrievable, and the regression test passed.
 
 ### A.3 Test defect or product defect
 A test expects cancelled appointments to be deleted, but FR-07 says history must be retained. What should be changed? Explain why. Also decide whether a test expecting different practitioners at the same time to conflict reflects AC-04.2. Do not assume every failing test is correct.
 
-Response and reason: [complete]
+Response and reason:
+1. Cancelled appointments:
+   This is a test defect. FR-07 requires cancelled appointments to be retained for history. Therefore, a test expecting cancelled appointments to be deleted is incorrect. The test should be changed to check that cancelled appointments remain stored and retrievable. The correct product behaviour should not be changed to satisfy an incorrect test.
+2. Different practitioners at the same time:
+   This is also a test defect. According to AC-04.2, the booking conflict rule applies when the same practitioner has another scheduled appointment at the same time. Different practitioners can have appointments at the same time. Therefore, the test should be corrected to allow this situation.
+Conclusion: A failing test does not always mean the product code is wrong. Tests must be checked against the requirements before changing the implementation.
 
 ### A.4 Refactoring smell hunt
 Consider a hypothetical 70-line AppointmentService method containing duplicate status strings, direct collection manipulation, printing, validation and four nested conditionals. Identify the smells and propose small refactorings that preserve required behaviour. The direct collection work replaces the old storage-specific scenario; use the existing SmartCareDataStore boundary. Do not implement an extra architecture.
 Classify these proposed changes as refactoring, repair or feature: rename appt to appointment; extract a repeated conflict helper; add rescheduling; restore retained cancellation lookup; replace a magic status string with the existing enum. Explain the behaviour that must remain unchanged.
 
-Response and reason: [complete]
+
+Response and reason:
+Part 1 — Code smells and proposed refactorings:
+1. Long method: A 70-line method is difficult to read and maintain. Extract smaller helper methods for separate tasks.
+2. Duplicate status strings: Repeated strings can cause mistakes. Replace them with the existing AppointmentStatus enum.
+3. Direct collection manipulation: The service should use SmartCareDataStore methods instead of accessing stored collections directly. This keeps storage responsibilities inside the data-store layer.
+4. Printing inside the service: Printing mixes business logic with user interface responsibilities. Keep output handling outside the service.
+5. Mixed responsibilities: Validation, booking and status checks are combined in one method. Extract small helper methods to make the code easier to understand.
+6. Four nested conditionals: Deep nesting makes the logic difficult to follow. Use simple guard clauses where appropriate.
+Part 2 — Classification of proposed changes:
+1. Rename appt to appointment:
+   Classification: Refactoring.
+   Reason: Improves readability without changing behaviour.
+2. Extract a repeated conflict helper:
+   Classification: Refactoring.
+   Reason: Removes repeated logic while preserving the same booking conflict rules.
+3. Add rescheduling:
+   Classification: Feature.
+   Reason: Introduces new functionality that was not previously available.
+4. Restore retained cancellation lookup:
+   Classification: Repair.
+   Reason: Fixes a defect so cancelled appointments remain retrievable as required by FR-07.
+5. Replace a magic status string with the existing enum:
+   Classification: Refactoring.
+   Reason: Improves code clarity and consistency without changing the meaning of the status.
+Behaviour to preserve: Successful bookings, participant validation, duplicate appointment rejection, same-practitioner scheduling conflicts, cancellation behaviour and retained appointment history must remain unchanged. Existing tests and regression tests should pass after any refactoring.
+Conclusion: Refactoring improves code structure without intentionally changing external behaviour. Repairs correct defects, while features introduce new functionality.
+
 
 ### A.5 Traceback and hypothesis ranking
 Using one actual failure, identify its exception/assertion, expected and observed values, test line, application call path and supporting requirement. List three plausible causes and rank them by fit with the available evidence. For each cause, name a check that could distinguish it from the others. Explain why a traceback alone does not establish the cause.
 
-Response and reason: [complete]
+Response and reason:
+Actual failure: F8-02 — Cancelled appointment lookup.
+Exception/assertion: The failing regression test expected the cancelled appointment A1 to remain retrievable, but the lookup returned None. The service lookup also raised LookupError when the cancelled appointment was requested.
+Expected value: The original Appointment object A1, with status CANCELLED.
+Observed value: None from the data-store lookup, causing LookupError when accessed through the service.
+Test location: tests/test_regressions.py, in test_f8_02_cancelled_appointment_still_retrievable(), at the assertion checking store.find_appointment("A1") is original.
+Application call path: The test creates an appointment through AppointmentService.book_appointment(), cancels it through AppointmentService.cancel_appointment(), and checks retrieval through SmartCareDataStore.find_appointment(). The service lookup also calls the same data-store method.
+Supporting requirement: FR-07 requires cancelled appointments to remain stored and retrievable for history.
+Ranked hypotheses:
+1. Most likely — The data-store lookup incorrectly filters out cancelled appointments.
+   Check: Inspect find_appointment() in smartcare/data_store.py and check whether it excludes appointments with status CANCELLED.
+2. Less likely — Cancellation removes the appointment from storage.
+   Check: Inspect the cancellation method and the stored appointments after cancellation. The project has no public delete operation.
+3. Least likely — The test uses an incorrect appointment ID.
+   Check: Compare the ID used during booking, cancellation and lookup to confirm they all use A1.
+Conclusion: The first hypothesis was supported by the code inspection and regression test. The faulty lookup excluded cancelled appointments. After repairing the lookup, the regression test passed.
+A traceback identifies where a failure was detected, but it does not always identify the root cause. The developer must inspect the code, test hypotheses and compare the behaviour with the requirements before making changes.
+
 
 ### A.6 Exit question
 Why is changing code immediately after seeing a failure often a poor debugging strategy?
 
-Response and reason: [complete]
 
+Response and reason:
+Changing code immediately after seeing a failure is a poor debugging strategy because the actual cause may not be known. The failure could come from incorrect code, an incorrect test or a misunderstanding of the requirements.
+A better approach is to reproduce the failure, inspect the traceback, compare the expected and observed behaviour, and test possible causes before making a small repair.
+This reduces unnecessary changes and helps prevent new defects.
 
-Classification responses (1–5, each with reason): [complete]
-Tutorial debugging record — expected; observed; reproduction; hypothesis; evidence to inspect: [complete]
-Traceback — exception/assertion; expected/observed values; test line; call path; requirement; ranked causes and discriminating checks: [complete]
+Classification responses (1–5, each with reason): Completed in A.1. The five statements were classified as symptom, hypothesis/opinion, evidence, hypothesis/opinion and evidence, respectively. Each classification includes a reason.
+Tutorial debugging record — expected; observed; reproduction; hypothesis; evidence to inspect: Completed in A.2 using F8-02. FR-07 requires cancelled appointments to remain retrievable. The faulty lookup returned None for cancelled appointments. The record includes reproduction steps, the initial lookup-filtering hypothesis and evidence to inspect.
+Traceback — exception/assertion; expected/observed values; test line; call path; requirement; ranked causes and discriminating checks: Completed in A.5 using F8-02. The record identifies the failed assertion, expected original appointment, observed None, regression test function, application call path and FR-07. Three possible causes were ranked, with a separate check for each.
+
 
 ## B. Stage 7 baseline and safe preparation
 
