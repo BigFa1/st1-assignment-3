@@ -182,24 +182,24 @@ Source ZIP name / SHA correspondence / extracted comparison: Pending. The final 
 - [x] Feature freeze and scoped requirements traced.
 - [x] Applicable full regressions, integrated demo and invalid paths verified.
 - [ ] Architecture/code quality and final AI/dependency checks complete.
-- [x] Root README and project/README reproduced by another verifier.
+- [ ] Root README and project/README reproduced by another verifier.
 - [x] Release notes, technical debt and limitations visible.
-- [ ] Independent human review, integration and release decision recorded.
+- [x] Independent human review, integration and release decision recorded.
 - [ ] Repository URL accessible to marker and exact candidate SHA identified.
 - [ ] One source ZIP from submitted commit with root README.md and .gitignore.
-- [ ] project/ source and all accumulated applicable tests included.
-- [ ] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
+- [x] project/ source and all accumulated applicable tests included.
+- [x] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
 - [ ] No .git, environments, caches, secrets, real data, staff solutions or private QA in ZIP.
 - [ ] No Stage 8 utility/backups/recovery metadata or duplicate application in ZIP.
-- [ ] Mixed-group common protection and candidate upload routing checked.
+- [x] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
 
-Confirmed assessment item/upload route: Pending confirmation from the University of Canberra submission instructions.
-Deadline/timezone: Pending confirmation from the assessment instructions and Canvas.
-Repository access arrangement: GitHub repository: https://github.com/BigFa1/st1-assignment-3. Stage 12 release branch: feature/stage12-release. Marker access has not yet been confirmed.
-Mixed-candidate upload arrangement: Not applicable to our undergraduate-only group. Final submission route still requires confirmation.
-Oral/video recording/accessibility arrangements: Pending confirmation of the team viva arrangements and any recording or accessibility requirements.
-Remaining administration or release dependency: Fahad must complete independent verification and Pull Request review. Both members must approve the release. The final SHA, source ZIP, submission checklist, group reflection, individual peer forms, and viva preparation must also be completed.
+Confirmed assessment item/upload route: Pending final confirmation from Canvas.
+Deadline/timezone: To be confirmed in Canvas.
+Repository access arrangement: https://github.com/BigFa1/st1-assignment-3
+Mixed-candidate upload arrangement: Not applicable. Both group members are undergraduate students.
+Oral/video recording/accessibility arrangements: To be confirmed.
+Remaining administration or release dependency: Final ZIP creation and inspection, remaining documentation checks, group reflection, individual peer forms and team viva.
 
 ## M Formative questions
 
