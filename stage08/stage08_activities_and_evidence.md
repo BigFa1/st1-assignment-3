@@ -232,14 +232,14 @@ Result — accepted, revised or rejected / reason / behaviour-preservation concl
 
 ## I. Git, human review and integration
 
-Issues for both defects / refactor scope and owners: [complete]
-Branch / prepared, repair and refactor checkpoints: [link B/C/D/H]
-PR link and another member's reviewer identity: [complete]
-Key human feedback, difference from Copilot findings and response/outcome: [complete]
-Actual review approval / merge evidence: [complete]
-Integrated code SHA and team pull/retest command / working directory / result: [complete]
-Evidence-only later SHA / explanation if different: [complete or not applicable]
-Each member's substantive contribution and artefact: [complete]
+Issues for both defects / refactor scope and owners: GitHub Issue #10 covers F8-01 (same-practitioner double-booking), Issue #11 covers F8-02 (cancelled appointment lookup), and Issue #12 covers the appointment booking refactoring. All three issues were created and assigned to Mohammed Aboset (MohammedAboset).
+Branch / prepared, repair and refactor checkpoints: Stage 8 work was completed on branch `debug/stage08`. Prepared faulty-state commit: `058e614`. Human-first hypotheses: `1cf05ca`. Failing regression evidence: `d9b8c2e`. Repair commit: `6737a6f`. Refactoring commit: `2d85ff2`. Final pre-merge documentation commit: `2ad15e4`. See Sections B, C, D and H.
+PR link and another member's reviewer identity: Mohammed Aboset created Pull Request #13 to merge `debug/stage08` into `main`. Fahad Almajeed (BigFa1), the repository owner and other group member, reviewed the PR. Link: https://github.com/BigFa1/st1-assignment-3/pull/13
+Key human feedback, difference from Copilot findings and response/outcome: Fahad reviewed both defect repairs, the regression tests and the refactoring. He independently ran the full test suite on the review branch and reported that all 30 tests passed. He confirmed that both defects were addressed and that the refactoring separated participant lookup from booking. He found no blocking issues. Unlike Copilot's F8-02 consultation, which inspected the wrong branch, Fahad reviewed the Stage 8 changes. His feedback supported accepting the repairs and refactoring without further code changes.
+Actual review approval / merge evidence: Fahad (BigFa1) approved PR #13 and merged it into `main`. GitHub confirms that the pull request was successfully merged and closed. Merge commit: `362e9ba`.
+Integrated code SHA and team pull/retest command / working directory / result: Integrated code SHA: `362e9ba`. Mohammed Aboset switched to `main`, pulled the latest changes using `git pull origin main`, and confirmed the merge commit using `git log -1 --oneline`. He then ran `python -m pytest -v` from `project/`. Result: 30 passed, 0 failed in 0.03 seconds. Fahad also reported independently running the full suite on the review branch, with all 30 tests passing.
+Evidence-only later SHA / explanation if different: The integrated code SHA is `362e9ba`. Final evidence documentation will be committed separately on branch `docs/stage08-final-evidence`. The evidence-only commit SHA will be recorded once created.
+Each member's substantive contribution and artefact: Mohammed Aboset (MohammedAboset) completed the debugging, human-first hypotheses, Copilot evaluation, regression tests, defect repairs, refactoring, GitHub Issues #10–#12, PR #13 and evidence documentation. Relevant commits include `1cf05ca`, `d9b8c2e`, `6737a6f` and `2d85ff2`. Fahad Almajeed (BigFa1) independently reviewed the changes, ran the full test suite, provided feedback, approved PR #13 and merged it into `main` at commit `362e9ba`.
 
 
 ## J. Required reflections
@@ -296,18 +296,18 @@ Response: Diagnose the failure using evidence, write a regression test that fail
 
 ## L. Completion and handover
 
-- [ ] Existing project, earlier tests and stage records preserved.
-- [ ] Passing Stage 7 SHA and safe preparation details recorded.
-- [ ] Both defects reproduced with meaningful failing tests.
-- [ ] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
-- [ ] Supported causes and minimal repairs explained; focused and full regression results recorded.
-- [ ] One genuine refactor verified under passing before/after tests.
-- [ ] Human PR review, feedback resolution and integrated retest recorded.
-- [ ] Tutorial, three reflections and ten formative responses complete.
-- [ ] Local recovery metadata excluded from submitted source.
-- [ ] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
+- [x] Existing project, earlier tests and stage records preserved.
+- [x] Passing Stage 7 SHA and safe preparation details recorded.
+- [x] Both defects reproduced with meaningful failing tests.
+- [x] Both human hypotheses recorded before Copilot; actual suggestions evaluated with evidence.
+- [x] Supported causes and minimal repairs explained; focused and full regression results recorded.
+- [x] One genuine refactor verified under passing before/after tests.
+- [x] Human PR review, feedback resolution and integrated retest recorded.
+- [x] Tutorial, three reflections and ten formative responses complete.
+- [x] Local recovery metadata excluded from submitted source.
+- [x] Same project and full suite ready for Stage 9 after Stage 8 integration, verification and recording.
 
-Verified integrated code SHA / result: see I.
-Submitted SHA and evidence-only difference if any: [complete]
-Unresolved issues or incomplete checks / owner / next action: [complete]
-Handover note: [complete]
+Verified integrated code SHA / result: `362e9ba`. Pull Request #13 was approved by Fahad Almajeed and merged into `main`. After pulling the integrated code, Mohammed Aboset ran `python -m pytest -v` from `project/`. Result: 30 passed, 0 failed in 0.03 seconds.
+Submitted SHA and evidence-only difference if any: Integrated code SHA is `362e9ba`. Final documentation updates are being completed on branch `docs/stage08-final-evidence`. The final evidence-only commit SHA will be recorded after committing and merging this documentation.
+Unresolved issues or incomplete checks / owner / next action: No outstanding code defects or failing tests were identified. Final documentation commit and integration remain to be completed by Mohammed Aboset and reviewed by Fahad Almajeed.
+Handover note: Stage 8 debugging, repairs, regression tests, refactoring and human review are complete. Both defects have been repaired, and all 30 tests pass on the integrated `main` branch. The project is ready to continue to Stage 9 after the final evidence documentation is integrated.
