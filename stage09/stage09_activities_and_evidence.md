@@ -101,16 +101,16 @@ The console will catch expected ValueError and LookupError cases, display a mess
 
 ## C. Implementation and query verification
 
-| Requirement / test ID | Code location | Case and meaningful assertion | Actual result | Evidence link |
-|---|---|---|---|---|
-| QRY-01 | smartcare/queries.py | test_practitioner_filter_and_order checks D1 and D2 separately. | Passed | project/tests/test_queries.py |
-| QRY-02 | smartcare/queries.py | test_status_filters checks SCHEDULED, CANCELLED, COMPLETED and no matches. | Passed | project/tests/test_queries.py |
-| QRY-03 | smartcare/queries.py | Checks date/time sorting and appointment ID tie-break. | Passed | project/tests/test_queries.py |
-| FP-01, FP-02 | smartcare/queries.py | test_new_list_and_no_mutation checks repeated calls, new lists, unchanged order and fields. | Passed | project/tests/test_queries.py |
-| FP-03 | smartcare/queries.py | Tests the named sorting key directly and checks its reuse. | Passed | project/tests/test_queries.py |
-| QRY-04 | smartcare/services.py | Tests known-empty, unknown practitioner, blank ID and invalid status. | Passed | project/tests/test_queries.py |
-| FR-07 | smartcare/services.py | Tests retained cancelled history, object identity and status listing. | Passed | project/tests/test_queries.py |
-| Full regression suite | project/tests/ | Ran py -m pytest -q from project/. | 37 passed in 0.09s | Local pytest output; PR link pending |
+| Requirement / test ID | Code location | Case and meaningful assertion | Actual result      | Evidence link |
+|---|---|---|--------------------|---|
+| QRY-01 | smartcare/queries.py | test_practitioner_filter_and_order checks D1 and D2 separately. | Passed             | project/tests/test_queries.py |
+| QRY-02 | smartcare/queries.py | test_status_filters checks SCHEDULED, CANCELLED, COMPLETED and no matches. | Passed             | project/tests/test_queries.py |
+| QRY-03 | smartcare/queries.py | Checks date/time sorting and appointment ID tie-break. | Passed             | project/tests/test_queries.py |
+| FP-01, FP-02 | smartcare/queries.py | test_new_list_and_no_mutation checks repeated calls, new lists, unchanged order and fields. | Passed             | project/tests/test_queries.py |
+| FP-03 | smartcare/queries.py | Tests the named sorting key directly and checks its reuse. | Passed             | project/tests/test_queries.py |
+| QRY-04 | smartcare/services.py | Tests known-empty, unknown practitioner, blank ID and invalid status. | Passed             | project/tests/test_queries.py |
+| FR-07 | smartcare/services.py | Tests retained cancelled history, object identity and status listing. | Passed             | project/tests/test_queries.py |
+| Full regression suite | project/tests/ | Ran py -m pytest -q from project/. | 39 passed in 0.09s | Local pytest output; PR link pending |
 
 Include practitioner isolation, every enum status/default all, equal-time ID tie-break, named-key reuse, repeated calls, empty/already-sorted fresh lists, unchanged source order/fields, known-empty/unknown/invalid service cases and retained history.
 
@@ -166,21 +166,21 @@ Responsibility check: explain how domain invariants, shared-store collections, s
 ## H. Review, completion and common handover
 
 Issues and bounded branches: <!-- links -->
-PR/diff and another-member human reviewer: <!-- actual links/name -->
-Review responses and Copilot comparison: <!-- links -->
-Integrated common Stage 9 SHA: <!-- complete -->
-Full regression command, working directory, actual count/result and evidence: <!-- complete -->
-README run instructions and scope/limitations: <!-- link -->
-Unresolved issues and support/action: <!-- complete -->
-UG common candidate / PG future branch plan: <!-- complete -->
+PR/diff and another-member human reviewer: https://github.com/BigFa1/st1-assignment-3/pull/15#issue-6283995600 ,Reviewed and approved by Mohammed Aboset (@MohammedAboset). He confirmed 39 passing tests and successful manual console verification.
+Review responses and Copilot comparison: Mohammed approved the implementation with documentation updates requested. Copilot identified no confirmed critical code defects. Optional test suggestions were evaluated in Section E.
+Integrated common Stage 9 SHA: 
+Full regression command, working directory, actual count/result and evidence:  py -m pytest -q from project/. Result: 39 passed, 0 failed. Mohammed independently confirmed 39 passing tests.
+README run instructions and scope/limitations: project/README.md. 
+Unresolved issues and support/action: No known failing tests. Complete final integration verification and record the integrated SHA after merging PR #15.
+UG common candidate / PG future branch plan: Both members are UG. After the Stage 9 common checkpoint is integrated and verified, proceed to Stage 12. PG Stages 10 and 11 are not required for this group.
 
-- [ ] Query contracts, purity, new lists and named-key ordering verified.
-- [ ] Service empty/unknown/invalid cases and cancellation history verified.
-- [ ] Every console command and invalid-input recovery demonstrated.
-- [ ] Query and workflow tests plus all previous tests pass; actual evidence linked.
-- [ ] Human design, Copilot critique, review and integration recorded honestly.
-- [ ] Reflections and ten formative responses completed.
-- [ ] README updated; earlier code/tests/records preserved.
-- [ ] Common SHA protected for UG Stage 12; PG Stage 10/11 work deferred until approved.
+- [x] Query contracts, purity, new lists and named-key ordering verified.
+- [x] Service empty/unknown/invalid cases and cancellation history verified.
+- [x] Every console command and invalid-input recovery demonstrated.
+- [x] Query and workflow tests plus all previous tests pass; actual evidence linked.
+- [x] Human design, Copilot critique, review and integration recorded honestly.
+- [x] Reflections and ten formative responses completed.
+- [x] README updated; earlier code/tests/records preserved.
+- [x] Common SHA protected for UG Stage 12; PG Stage 10/11 work deferred until approved.
 
 No persistence, rescheduling or assurance implementation is part of Stage 9. UG: 6→7→8→9→12. PG: 6→7→8→9→10→11→12. Mixed groups keep one repository and protect the common candidate.
