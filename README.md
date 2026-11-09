@@ -5,13 +5,13 @@ Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves 
 
 ## Group index
 
-- Group and tutorial: [complete]
-- Member names, GitHub usernames and UG/PG cohorts: [complete]
-- Shared repository URL: [complete]
-- Latest completed stage: [complete]
-- Verified code SHA: [complete]
-- Test command, working directory and observed result: [complete]
-- Final submitted SHA, if different from tested code SHA: [complete; explain evidence-only changes]
+- Group and tutorial: Monday 9:30–11:30, Group 4.
+- Member names, GitHub usernames and UG/PG cohorts: Fahad Almajeed (@BigFa1, UG) and Mohammed Aboset (@MohammedAboset, UG).
+- Shared repository URL: https://github.com/BigFa1/st1-assignment-3
+- Latest completed stage: Stage 8 code integrated and verified. Final evidence handover pending. Stage 9 in progress.
+- Verified code SHA: 362e9ba222741ab893d0b7a7cb15305b50519168 (Stage 8 integrated code; Stage 9 final SHA pending).
+- Test command, working directory and observed result: py -m pytest -q from project/ on feature/stage9-queries. Result: 39 passed, 0 failed, in 0.07s. Stage 9 changes not yet integrated.
+- Final submitted SHA, if different from tested code SHA: Pending Stage 9 review and merge. The final integrated SHA will be recorded after completion.
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
 
@@ -54,3 +54,51 @@ cd ..
 ```
 
 Use the approved environment described in the Git/GitHub group guide. The verified baseline is Python 3.13 with pytest 8.3.5. GitHub Copilot is the nominated assistant; verify significant output and record required decisions. Use synthetic data only. Use each supplied record only when you reach that stage in the applicable sequence.
+
+
+## Stage 9 - Queries and Console Integration
+
+The SmartCare application now supports appointment queries and an interactive console menu.
+
+### How to run
+
+Open the terminal in the `project/` directory.
+
+Run the original demo:
+```powershell
+py main.py
+```
+
+Run the interactive menu:
+```powershell
+py main.py --interactive
+```
+
+Run all tests:
+```powershell
+py -m pytest -q
+```
+
+### Features
+
+The interactive menu supports:
+- Registering and finding patients.
+- Registering and finding practitioners.
+- Booking and cancelling appointments.
+- Finding appointments, including cancelled appointments.
+- Listing practitioner appointments with optional status filtering.
+- Sorting appointments by date/time and appointment ID.
+- Handling invalid inputs without closing the menu.
+
+### Testing
+
+The Stage 9 query and workflow tests were added to the existing test suite.
+
+Latest verified result: 39 tests passed, 0 failed.
+
+### Limitations
+
+- Data is stored in memory and is lost when the program exits.
+- No database or persistent storage is implemented.
+- Appointment rescheduling is not supported.
+- The application uses synthetic data for testing and demonstration.
