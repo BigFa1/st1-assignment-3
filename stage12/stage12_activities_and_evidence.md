@@ -170,10 +170,10 @@ Common decision / PG decision where different: The undergraduate release decisio
 
 ## K Final tested release SHA
 
-Exact common tested SHA: 34e713285bb56cfd5827279bb4ed40c1059ed6ce. Fahad independently verified this commit using a fresh clone on Windows with Python 3.12.10 and pytest 8.3.5. All 39 tests passed in 0.66s. The original demo and interactive menu also worked correctly, with no issues found. Mohammed's local regression testing also passed all 39 tests.
+Exact common tested SHA: ded187e0df4e94a6910be7a7452d266351d282c5. The final integrated version on main passed all 39 automated tests. Independent verification was completed by Fahad on commit 34e713285bb56cfd5827279bb4ed40c1059ed6ce, with 39 tests passed.
 Exact PG tested SHA or not applicable: Not applicable. Both group members are undergraduate students.
-Final submitted SHA / repository URL: Pending final review and merge. Repository: https://github.com/BigFa1/st1-assignment-3
-Evidence-only later commit and difference explanation: Sections G–J were updated after the first release candidate commit. These are documentation changes only. A new commit SHA will be recorded after the remaining evidence is completed.
+Final submitted SHA / repository URL: ded187e0df4e94a6910be7a7452d266351d282c5 / https://github.com/BigFa1/st1-assignment-3
+Evidence-only later commit and difference explanation: The final integrated commit includes the approved Stage 12 documentation and README updates. No executable code changes were made after the independently tested release candidate.
 Executable changes after testing and re-verification: No executable code changes have been made during Stage 12 so far. All 39 automated tests passed. Final verification will be repeated before submission.
 Source ZIP name / SHA correspondence / extracted comparison: Pending. The final source ZIP will be created from the exact submitted SHA after approval. Its contents will be checked against the final repository commit.
 

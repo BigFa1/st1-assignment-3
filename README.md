@@ -8,10 +8,10 @@ Baseline: Stage 6 foundation, 2026 revision 2.
 - Group and tutorial: Monday 9:30–11:30, Group 4.
 - Member names, GitHub usernames and UG/PG cohorts: Fahad Almajeed (@BigFa1, UG) and Mohammed Aboset (@MohammedAboset, UG).
 - Shared repository URL: https://github.com/BigFa1/st1-assignment-3
-- Latest completed stage: Stage 9 completed, reviewed and merged into main. Stage 12 final release verification is in progress.
-- Verified code SHA: 26a6195ac76a66298b98a3e383fb0a6406f2b918 (Stage 12 starting commit).
-- Test command, working directory and observed result: python -m pytest -q from project/ using Python 3.14.7 and pytest 9.2.0. Result: 39 passed, 0 failed.
-- Final submitted SHA, if different from tested code SHA: Pending Stage 12 final verification, review and merge.
+- Latest completed stage: Stage 12 completed and merged into main.
+- Verified code SHA: ded187e0df4e94a6910be7a7452d266351d282c5 (final integrated undergraduate release).
+- Test command, working directory and observed result: python -m pytest -q from project/. Python 3.14.7, pytest 8.3.5. Result: 39 passed, 0 failed.
+- Final submitted SHA, if different from tested code SHA: ded187e0df4e94a6910be7a7452d266351d282c5.
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
 
