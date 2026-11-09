@@ -189,7 +189,7 @@ Source ZIP name / SHA correspondence / extracted comparison: SmartCare_Stage12_F
 - [x] One source ZIP from submitted commit with root README.md and .gitignore.
 - [x] project/ source and all accumulated applicable tests included.
 - [x] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
-- [ ] No .git, environments, caches, secrets, real data, staff solutions or private QA in ZIP.
+- [x] No .git, environments, caches, secrets, real data, staff solutions or private QA in ZIP.
 - [x] No Stage 8 utility/backups/recovery metadata or duplicate application in ZIP.
 - [x] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
