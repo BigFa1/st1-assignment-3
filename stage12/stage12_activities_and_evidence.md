@@ -100,20 +100,20 @@ Available AI evidence and missing evidence honestly disclosed: Earlier stage doc
 
 ## F README and reproducibility check
 
-| README item                                                   | Location                                           | Verifier        | Result/gap                                                                                        |
-|---------------------------------------------------------------|----------------------------------------------------|-----------------|---------------------------------------------------------------------------------------------------|
-| Purpose and included common/PG scope                          | Root README.md and project/README.md               | Mohammed Aboset | SmartCare purpose and undergraduate scope documented. PG-only stages are not part of our release. |
-| Out-of-scope capabilities and known limitations               | project/README.md                                  | Mohammed Aboset | In-memory data storage and current limitations documented.                                        |
-| Confirmed teaching Python version and dependency installation | project/README.md and project/requirements-dev.txt | Mohammed Aboset | Python 3.14.7 used locally. pytest 8.3.5 installed successfully from requirements-dev.txt.        |
-| Working directory / demo / interactive / test commands        | project/README.md                                  | Mohammed Aboset | Commands documented. Interactive menu tested locally and all 39 automated tests passed.           |
-| Repository structure and architecture responsibilities        | project/README.md                                  | Mohammed Aboset | Project structure and main components documented.                                                 |
-| Responsible AI summary / synthetic-data rule                  | project/README.md                                  | Mohammed Aboset | Responsible AI guidance and synthetic-data rule documented.                                       |
-| Release label/version and SHA links                           | Root README.md and project/README.md               | Mohammed Aboset | SmartCare v1.0 release candidate documented. Starting SHA recorded. Final release SHA pending.    |
+| README item                                                   | Location                                           | Verifier                           | Result/gap                                                                                                                                                        |
+|---------------------------------------------------------------|----------------------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Purpose and included common/PG scope                          | Root README.md and project/README.md               | Mohammed Aboset and Fahad Almajeed | SmartCare purpose and undergraduate scope documented. PG-only stages are not part of our release.                                                                 |
+| Out-of-scope capabilities and known limitations               | project/README.md                                  | Mohammed Aboset and Fahad Almajeed | Session-only storage and current limitations documented. No issues reported during independent verification.                                                      |
+| Confirmed teaching Python version and dependency installation | project/README.md and project/requirements-dev.txt | Mohammed Aboset and Fahad Almajeed | Mohammed tested on macOS with Python 3.14.7. Fahad tested on Windows with Python 3.12.10. Both used pytest 8.3.5.                                                 |
+| Working directory / demo / interactive / test commands        | project/README.md                                  | Mohammed Aboset and Fahad Almajeed | Mohammed: 39 tests passed in 0.03s. Fahad: 39 tests passed in 0.66s. Fahad also confirmed the original demo, interactive menu, and invalid-input recovery worked. |
+| Repository structure and architecture responsibilities        | project/README.md                                  | Mohammed Aboset                    | Project structure and main components documented. No application defects reported by Fahad.                                                                       |
+| Responsible AI summary / synthetic-data rule                  | project/README.md                                  | Mohammed Aboset                    | Responsible AI guidance and synthetic-data rule documented. Final release checks remain pending.                                                                  |
+| Release label/version and SHA links                           | Root README.md and project/README.md               | Mohammed Aboset                    | SmartCare v1.0 release candidate documented. Fahad verified commit 34e713285bb56cfd5827279bb4ed40c1059ed6ce. Final submitted SHA pending.                         |
 Root README index and project/README verified: Both README files were updated for Stage 12. Git whitespace check passed.
-Fresh clone or extracted ZIP / candidate identity: Pending independent verification by Fahad Almajeed using the final release candidate.
-Verifier and clean environment / actual version: Mohammed Aboset completed local verification using Python 3.14.7 and pytest 8.3.5. Independent clean-environment verification is pending.
-Setup/run/test commands and observed results: From project/, installed dependencies using python -m pip install -r requirements-dev.txt, ran python -m pytest -q with 39 tests passed in 0.03s, and successfully tested the interactive application using python main.py --interactive.
-Missing local file or setup gap / remedy and recheck: No local dependency installation or automated testing errors observed. Independent fresh-clone verification remains pending.
+Fresh clone or extracted ZIP / candidate identity: Fahad Almajeed independently verified a fresh clone of commit 34e713285bb56cfd5827279bb4ed40c1059ed6ce from feature/stage12-release.
+Verifier and clean environment / actual version: Mohammed Aboset tested locally on macOS using Python 3.14.7 and pytest 8.3.5. Fahad Almajeed independently tested on Windows using Python 3.12.10 and pytest 8.3.5.
+Setup/run/test commands and observed results: Mohammed installed dependencies using python -m pip install -r requirements-dev.txt and ran python -m pytest -q from project/, with 39 passed in 0.03s. Fahad independently ran the full regression tests from a fresh clone, with 39 passed in 0.66s. He also confirmed the original demo and interactive menu worked, including registration, booking, conflict rejection, cancellation, retrieval, listing, and invalid-input recovery.
+Missing local file or setup gap / remedy and recheck: No setup problems or application defects were reported during either member's verification. Final Pull Request approval, integration, and submission package checks remain pending.
 
 ## G Known limitations debt and release notes
 
@@ -151,8 +151,8 @@ Release blockers still open / status: No confirmed application defects are curre
 
 ## I Git review and integration evidence
 
-Issue / PR / diff links and reviewed SHA: Stage 12 release branch: feature/stage12-release. GitHub repository: https://github.com/BigFa1/st1-assignment-3. Release candidate SHA: 0c0e09d6237ea121826efed85fa454806d9c8c07. Pull Request link and final reviewed SHA to be confirmed after review.
-Independent reviewer / feedback / response: Fahad Almajeed (@BigFa1) is the intended independent reviewer. His code review, fresh-clone verification, feedback, and any required corrections are pending.
+Issue / PR / diff links and reviewed SHA: Stage 12 Pull Request for feature/stage12-release in https://github.com/BigFa1/st1-assignment-3. Fahad independently reviewed and tested commit 34e713285bb56cfd5827279bb4ed40c1059ed6ce. Final Pull Request approval and integration are pending.
+Independent reviewer / feedback / response: Fahad Almajeed (@BigFa1) completed independent fresh-clone verification on Windows using Python 3.12.10 and pytest 8.3.5. All 39 tests passed in 0.66s. The original demo and interactive menu worked correctly. He tested patient and practitioner registration, appointment booking, conflict rejection, cancellation, retrieval, listing, and invalid-input recovery. No issues were found. Mohammed recorded these results in Section F and Section I. Fahad will review the final documentation before approving the Pull Request.
 Integration commit / full recheck: Stage 12 has not yet been merged into main. The release candidate passed all 39 automated tests using pytest 8.3.5. The final integration SHA and post-merge regression results will be recorded after approval and merging.
 Tracked and untracked file inspection / cleanliness: Git status was checked before committing. Only the root README.md, project/README.md, and stage12/stage12_activities_and_evidence.md were modified. Git diff --check passed. Final working-tree cleanliness after all Stage 12 updates is pending.
 Secrets/staff material/caches/tool-metadata exclusion check: No unexpected files appeared in the earlier git status output. A complete tracked-file and release ZIP inspection is still required to confirm that secrets, private staff material, virtual environments, caches, and unnecessary tool metadata are excluded.
@@ -161,16 +161,16 @@ Named substantive contributions: Mohammed Aboset completed Stage 12 local regres
 
 ## J Human release decision
 
-Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: NOT YET READY. The application passed local testing, but independent verification, final review, and submission checks are still pending.
-Approver / date / rationale and evidence: Pending approval by Mohammed Aboset and Fahad Almajeed. Local evidence includes 39 passing automated tests using pytest 8.3.5, successful interactive testing, and updated release documentation. Final approval date will be recorded after verification.
-What risks remain / conditions / owners: Fahad must complete the independent fresh-clone verification and Pull Request review. Both members must confirm the final release decision. Mohammed will complete the final SHA, release ZIP, and submission checks.
+Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: NOT YET READY. Both group members have successfully tested SmartCare, including Fahad's independent fresh-clone verification. Final Pull Request approval, integration, and submission checks are still pending.
+Approver / date / rationale and evidence: Mohammed Aboset completed local verification with 39 tests passed. Fahad Almajeed completed independent verification on Windows with 39 tests passed in 0.66s and no issues found. Final approval by both members is pending.
+What risks remain / conditions / owners: Fahad must review and approve the final Pull Request. Mohammed must complete the final SHA, release ZIP, and submission checks. Both members must confirm the final release decision.
 Can the team explain the system: Mohammed has reviewed the main application components and tested the interactive functions. Both members must confirm they can explain the system during the final viva.
 Can a change be recovered: Yes. Git records previous commits, including the Stage 12 starting SHA 26a6195ac76a66298b98a3e383fb0a6406f2b918. The group can return to a known-good version if necessary and repeat the tests.
 Common decision / PG decision where different: The undergraduate release decision is NOT YET READY until the remaining checks are completed. Postgraduate-only requirements are not applicable because both members are undergraduate students.
 
 ## K Final tested release SHA
 
-Exact common tested SHA: 0c0e09d6237ea121826efed85fa454806d9c8c07 was the first Stage 12 release candidate. All 39 automated tests passed locally using pytest 8.3.5. Final candidate testing and independent verification are pending.
+Exact common tested SHA: 34e713285bb56cfd5827279bb4ed40c1059ed6ce. Fahad independently verified this commit using a fresh clone on Windows with Python 3.12.10 and pytest 8.3.5. All 39 tests passed in 0.66s. The original demo and interactive menu also worked correctly, with no issues found. Mohammed's local regression testing also passed all 39 tests.
 Exact PG tested SHA or not applicable: Not applicable. Both group members are undergraduate students.
 Final submitted SHA / repository URL: Pending final review and merge. Repository: https://github.com/BigFa1/st1-assignment-3
 Evidence-only later commit and difference explanation: Sections G–J were updated after the first release candidate commit. These are documentation changes only. A new commit SHA will be recorded after the remaining evidence is completed.
@@ -182,7 +182,7 @@ Source ZIP name / SHA correspondence / extracted comparison: Pending. The final 
 - [x] Feature freeze and scoped requirements traced.
 - [x] Applicable full regressions, integrated demo and invalid paths verified.
 - [ ] Architecture/code quality and final AI/dependency checks complete.
-- [ ] Root README and project/README reproduced by another verifier.
+- [x] Root README and project/README reproduced by another verifier.
 - [x] Release notes, technical debt and limitations visible.
 - [ ] Independent human review, integration and release decision recorded.
 - [ ] Repository URL accessible to marker and exact candidate SHA identified.
