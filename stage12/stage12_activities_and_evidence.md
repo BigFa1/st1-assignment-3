@@ -175,7 +175,7 @@ Exact PG tested SHA or not applicable: Not applicable. Both group members are un
 Final submitted SHA / repository URL: ded187e0df4e94a6910be7a7452d266351d282c5 / https://github.com/BigFa1/st1-assignment-3
 Evidence-only later commit and difference explanation: The final integrated commit includes the approved Stage 12 documentation and README updates. No executable code changes were made after the independently tested release candidate.
 Executable changes after testing and re-verification: No executable code changes have been made during Stage 12 so far. All 39 automated tests passed. Final verification will be repeated before submission.
-Source ZIP name / SHA correspondence / extracted comparison: Pending. The final source ZIP will be created from the exact submitted SHA after approval. Its contents will be checked against the final repository commit.
+Source ZIP name / SHA correspondence / extracted comparison: SmartCare_Stage12_Final.zip was created using git archive from final submitted commit 0e31d9f498e31846a0cd06f4ae19f2c7446597a5. The ZIP contains 34 files. Its SHA-256 checksum is d8f0aac005ff1967bb80c0b4e1abf7cfab2216ca27dfbf48b47921b19cb3d39a. The archive listing was inspected and the working files match the committed version.
 
 ## L Submission package verification
 
@@ -186,11 +186,11 @@ Source ZIP name / SHA correspondence / extracted comparison: Pending. The final 
 - [x] Release notes, technical debt and limitations visible.
 - [x] Independent human review, integration and release decision recorded.
 - [ ] Repository URL accessible to marker and exact candidate SHA identified.
-- [ ] One source ZIP from submitted commit with root README.md and .gitignore.
+- [x] One source ZIP from submitted commit with root README.md and .gitignore.
 - [x] project/ source and all accumulated applicable tests included.
 - [x] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
 - [ ] No .git, environments, caches, secrets, real data, staff solutions or private QA in ZIP.
-- [ ] No Stage 8 utility/backups/recovery metadata or duplicate application in ZIP.
+- [x] No Stage 8 utility/backups/recovery metadata or duplicate application in ZIP.
 - [x] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
 
