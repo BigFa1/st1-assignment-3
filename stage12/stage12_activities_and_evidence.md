@@ -181,18 +181,18 @@ Source ZIP name / SHA correspondence / extracted comparison: SmartCare_Stage12_F
 
 - [x] Feature freeze and scoped requirements traced.
 - [x] Applicable full regressions, integrated demo and invalid paths verified.
-- [ ] Architecture/code quality and final AI/dependency checks complete.
-- [ ] Root README and project/README reproduced by another verifier.
+- [x] Architecture/code quality and final AI/dependency checks complete.
+- [x] Root README and project/README reproduced by another verifier.
 - [x] Release notes, technical debt and limitations visible.
 - [x] Independent human review, integration and release decision recorded.
-- [ ] Repository URL accessible to marker and exact candidate SHA identified.
+- [x] Repository URL accessible to marker and exact candidate SHA identified.
 - [x] One source ZIP from submitted commit with root README.md and .gitignore.
 - [x] project/ source and all accumulated applicable tests included.
 - [x] All common applicable stage records included; Stage 10/11 records completed only for the PG pathway. UG-only groups retain supplied PG-only templates unchanged as intentionally not applicable, without fabricated N/A responses.
 - [x] No .git, environments, caches, secrets, real data, staff solutions or private QA in ZIP.
 - [x] No Stage 8 utility/backups/recovery metadata or duplicate application in ZIP.
 - [x] Mixed-group common protection and candidate upload routing checked.
-- [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
+- [x] Group reflection, confidential individual peer forms and common team viva routed separately.
 
 Confirmed assessment item/upload route: Pending final confirmation from Canvas.
 Deadline/timezone: To be confirmed in Canvas.
