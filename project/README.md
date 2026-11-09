@@ -1,68 +1,113 @@
-# SmartCare Stage 6 starter
+# SmartCare v1.0 - Course Release Candidate
 
-Requirements baseline: SmartCare A3 2026 revision 2. Python 3.13 and pytest 8.3.5 verified. Runtime uses only the standard library.
+## Project Overview
 
-From this directory, using a Python environment with the development dependency installed:
+SmartCare is a simple Python appointment management application developed for Software Technology 1 Assignment 3 at the University of Canberra.
+
+It allows users to register patients and practitioners, book appointments, cancel appointments and search appointment records.
+
+This release covers the undergraduate requirements from Stages 6, 7, 8 and 9, with final verification in Stage 12.
+
+## Requirements
+
+- Python 3.13 (teaching baseline)
+- Python 3.14.7 (locally tested)
+- pytest 9.2.0 (locally tested)
+- GitHub Copilot was the permitted coding assistant.
+
+The application uses the Python standard library. pytest is used for testing.
+
+## Installation
+
+Open a terminal in the project/ directory.
+
+Install the testing dependency:
+
+```sh
+python -m pip install -r requirements-dev.txt
+```
+
+## Running SmartCare
+
+Run the original demonstration:
 
 ```sh
 python main.py
-python -m pytest
 ```
 
-If needed in your approved environment: `python -m pip install -r requirements-dev.txt`.
+Run the interactive application:
 
-The demo registers synthetic records and books/finds an appointment. All supplied tests pass. Data exists only in this session and is lost on exit; FR-10 restart persistence is retired. Use synthetic information only.
-
-`domain.py` contains the entities, status and guarded cancellation. `data_store.py` holds three dictionaries through add/find/list methods. The three services share that object. Supplied registration, booking, appointment lookup and conflict checking work. IDs are trimmed, non-blank and case-sensitive. Properties provide read-only identity/appointment state; changes go through domain methods. No special architecture terminology is required.
-
-Stage 6 TODOs: service patient/practitioner lookup and cancellation. Stage 9 TODOs: pure query, named sort key, service listing and interactive menu. The starter TODO contracts are in docstrings. All three Stage 6 TODO calls deliberately raise NotImplementedError; future TODOs remain stubs. No PG rescheduling or assurance solution is supplied.
-
-Service booking accepts IDs and a `datetime` (local, minute precision). Console parser accepts exactly `YYYY-MM-DD HH:MM`. Store lookups return None when absent; service lookups raise LookupError. Invalid values, duplicates, conflicts and illegal transitions raise ValueError. Lists are new containers holding the stored objects. No age, duration, patient-conflict or past-date rules apply.
-
-
-## Stage 9 - Queries and Console Integration
-
-The SmartCare application now supports appointment queries and an interactive console menu.
-
-### How to run
-
-Open the terminal in the `project/` directory.
-
-Run the original demo:
-```powershell
-py main.py
+```sh
+python main.py --interactive
 ```
 
-Run the interactive menu:
-```powershell
-py main.py --interactive
+Run all automated tests:
+
+```sh
+python -m pytest -q
 ```
 
-Run all tests:
-```powershell
-py -m pytest -q
+## Features
+
+- Register and find patients.
+- Register and find practitioners.
+- Book appointments.
+- Prevent conflicting appointments for the same practitioner.
+- Allow different practitioners to have appointments at the same time.
+- Cancel scheduled appointments.
+- Keep cancelled appointments available for lookup.
+- List practitioner appointments.
+- Filter appointments by status.
+- Sort appointments by date, time and appointment ID.
+- Handle invalid user inputs.
+
+## Project Structure
+
+- main.py: Starts the application.
+- smartcare/domain.py: Defines patients, practitioners and appointments.
+- smartcare/data_store.py: Stores records in memory.
+- smartcare/services.py: Handles registration, booking, cancellation and lookup.
+- smartcare/queries.py: Filters and sorts appointments.
+- smartcare/console.py: Provides the interactive menu.
+- tests/: Contains automated tests.
+
+## Testing
+
+The Stage 12 regression test was performed using Python 3.14.7 and pytest 9.2.0.
+
+Command:
+
+```sh
+python -m pytest -q
 ```
 
-### Features
+Result: 39 tests passed, 0 failed.
 
-The interactive menu supports:
-- Registering and finding patients.
-- Registering and finding practitioners.
-- Booking and cancelling appointments.
-- Finding appointments, including cancelled appointments.
-- Listing practitioner appointments with optional status filtering.
-- Sorting appointments by date/time and appointment ID.
-- Handling invalid inputs without closing the menu.
+Starting release SHA:
+26a6195ac76a66298b98a3e383fb0a6406f2b918
 
-### Testing
+Final tested release SHA: Pending final verification.
 
-The Stage 9 query and workflow tests were added to the existing test suite.
+## Known Limitations
 
-Latest verified result: 39 tests passed, 0 failed.
-
-### Limitations
-
-- Data is stored in memory and is lost when the program exits.
-- No database or persistent storage is implemented.
+- All data is stored in memory and disappears when the application closes.
+- There is no database or permanent storage.
 - Appointment rescheduling is not supported.
-- The application uses synthetic data for testing and demonstration.
+- Appointment times use local minute precision without timezone information.
+- There is no user authentication or role management.
+- The application does not include patient portals, notifications, billing or clinical decision support.
+- The application is intended for coursework and demonstration, not real healthcare use.
+- Only synthetic patient and practitioner information should be used.
+
+## Responsible AI Use
+
+GitHub Copilot was the permitted coding assistant during development. AI-assisted work must be reviewed and verified by the team. The application is tested using automated tests and manual demonstrations.
+
+## Release Information
+
+Release: SmartCare v1.0 course release candidate.
+
+Repository:
+https://github.com/BigFa1/st1-assignment-3
+
+Final release approval and submitted SHA will be recorded in the Stage 12 evidence document.

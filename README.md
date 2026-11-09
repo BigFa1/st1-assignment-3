@@ -1,17 +1,17 @@
 # Software Technology 1 Assignment 3
 
 One group repository and one evolving SmartCare application.
-Baseline: Stage 6 foundation, 2026 revision 2. This starter deliberately leaves the three Stage 6 service tasks incomplete.
+Baseline: Stage 6 foundation, 2026 revision 2.
 
 ## Group index
 
 - Group and tutorial: Monday 9:30–11:30, Group 4.
 - Member names, GitHub usernames and UG/PG cohorts: Fahad Almajeed (@BigFa1, UG) and Mohammed Aboset (@MohammedAboset, UG).
 - Shared repository URL: https://github.com/BigFa1/st1-assignment-3
-- Latest completed stage: Stage 8 code integrated and verified. Final evidence handover pending. Stage 9 in progress.
-- Verified code SHA: 362e9ba222741ab893d0b7a7cb15305b50519168 (Stage 8 integrated code; Stage 9 final SHA pending).
-- Test command, working directory and observed result: py -m pytest -q from project/ on feature/stage9-queries. Result: 39 passed, 0 failed, in 0.07s. Stage 9 changes not yet integrated.
-- Final submitted SHA, if different from tested code SHA: Pending Stage 9 review and merge. The final integrated SHA will be recorded after completion.
+- Latest completed stage: Stage 9 completed, reviewed and merged into main. Stage 12 final release verification is in progress.
+- Verified code SHA: 26a6195ac76a66298b98a3e383fb0a6406f2b918 (Stage 12 starting commit).
+- Test command, working directory and observed result: python -m pytest -q from project/ using Python 3.14.7 and pytest 9.2.0. Result: 39 passed, 0 failed.
+- Final submitted SHA, if different from tested code SHA: Pending Stage 12 final verification, review and merge.
 
 Do not put student IDs, private peer ratings, credentials or personal contact details here.
 
