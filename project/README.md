@@ -18,3 +18,51 @@ The demo registers synthetic records and books/finds an appointment. All supplie
 Stage 6 TODOs: service patient/practitioner lookup and cancellation. Stage 9 TODOs: pure query, named sort key, service listing and interactive menu. The starter TODO contracts are in docstrings. All three Stage 6 TODO calls deliberately raise NotImplementedError; future TODOs remain stubs. No PG rescheduling or assurance solution is supplied.
 
 Service booking accepts IDs and a `datetime` (local, minute precision). Console parser accepts exactly `YYYY-MM-DD HH:MM`. Store lookups return None when absent; service lookups raise LookupError. Invalid values, duplicates, conflicts and illegal transitions raise ValueError. Lists are new containers holding the stored objects. No age, duration, patient-conflict or past-date rules apply.
+
+
+## Stage 9 - Queries and Console Integration
+
+The SmartCare application now supports appointment queries and an interactive console menu.
+
+### How to run
+
+Open the terminal in the `project/` directory.
+
+Run the original demo:
+```powershell
+py main.py
+```
+
+Run the interactive menu:
+```powershell
+py main.py --interactive
+```
+
+Run all tests:
+```powershell
+py -m pytest -q
+```
+
+### Features
+
+The interactive menu supports:
+- Registering and finding patients.
+- Registering and finding practitioners.
+- Booking and cancelling appointments.
+- Finding appointments, including cancelled appointments.
+- Listing practitioner appointments with optional status filtering.
+- Sorting appointments by date/time and appointment ID.
+- Handling invalid inputs without closing the menu.
+
+### Testing
+
+The Stage 9 query and workflow tests were added to the existing test suite.
+
+Latest verified result: 39 tests passed, 0 failed.
+
+### Limitations
+
+- Data is stored in memory and is lost when the program exits.
+- No database or persistent storage is implemented.
+- Appointment rescheduling is not supported.
+- The application uses synthetic data for testing and demonstration.
