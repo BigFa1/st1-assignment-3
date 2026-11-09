@@ -168,7 +168,7 @@ Responsibility check: explain how domain invariants, shared-store collections, s
 Issues and bounded branches: <!-- links -->
 PR/diff and another-member human reviewer: https://github.com/BigFa1/st1-assignment-3/pull/15#issue-6283995600 ,Reviewed and approved by Mohammed Aboset (@MohammedAboset). He confirmed 39 passing tests and successful manual console verification.
 Review responses and Copilot comparison: Mohammed approved the implementation with documentation updates requested. Copilot identified no confirmed critical code defects. Optional test suggestions were evaluated in Section E.
-Integrated common Stage 9 SHA: 
+Integrated common Stage 9 SHA: 654afcf10d111800f35984b32702b5f332c9aecd
 Full regression command, working directory, actual count/result and evidence:  py -m pytest -q from project/. Result: 39 passed, 0 failed. Mohammed independently confirmed 39 passing tests.
 README run instructions and scope/limitations: project/README.md. 
 Unresolved issues and support/action: No known failing tests. Complete final integration verification and record the integrated SHA after merging PR #15.
