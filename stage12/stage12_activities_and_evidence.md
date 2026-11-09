@@ -117,69 +117,73 @@ Missing local file or setup gap / remedy and recheck: No local dependency instal
 
 ## G Known limitations debt and release notes
 
-Delivered features: [response]
-Important fixes: [response]
-Architecture/quality improvements: [response]
-Known limitations: [response]
-AI-assisted development note: [response]
+Delivered features: SmartCare includes patient and practitioner management, appointment scheduling, patient search, appointment cancellation, and appointment queries through a console application.
+Important fixes: Previous stages addressed patient search behaviour, appointment validation, and regression issues. The final release candidate passed all 39 automated tests.
+Architecture/quality improvements: The application separates domain classes, data storage, services, and console interaction. Automated tests help verify the main features and expected errors.
+Known limitations: SmartCare stores data in memory, so records are lost when the application closes. It is a teaching application and is not designed for real clinical use.
+AI-assisted development note: GitHub Copilot was used during the permitted development activities. Human review and automated testing were used to check the application. AI assistance does not replace human verification.
 
-| Debt item | Impact | Priority | Future action | Accepted? / release rationale |
-|---|---|---|---|---|
-| [response] | [response] | [response] | [response] | [response] |
-Session-only synthetic data and minute-precision local time: [response]
-Production auth/roles, portal, notifications, billing/insurance, clinical AI exclusions: [response]
-Scale/concurrency, timezone policy, operations/monitoring, accessibility/usability limitations: [response]
-Difference between accepted scope limit and unresolved required behaviour: [response]
-PG assurance residual risks / owner / status or not applicable: [response]
+| Debt item                           | Impact                                                       | Priority             | Future action                                             | Accepted? / release rationale                                              |
+|-------------------------------------|--------------------------------------------------------------|----------------------|-----------------------------------------------------------|----------------------------------------------------------------------------|
+| Session-only data storage           | Records disappear when the application closes.               | Low                  | Add permanent storage in a future version.                | Accepted because permanent storage is outside the required scope.          |
+| No user authentication              | The application cannot securely manage real user accounts.   | High for production  | Add login and user roles before any real-world use.       | Accepted because SmartCare is a teaching application using synthetic data. |
+| Local time without timezone support | Appointment times may be unclear across different timezones. | Medium               | Add timezone handling in a future version.                | Accepted because the current application uses local appointment times.     |
+| Limited scalability and concurrency | The application is not designed for many simultaneous users. | Medium               | Add database storage and concurrency support.             | Accepted because the application is a small console-based project.         |
+| Limited accessibility and usability | The console interface may not suit all users.                | Medium               | Improve accessibility and consider a graphical interface. | Accepted because a production interface is outside the assignment scope.   |
+| No operational monitoring           | The application has no production monitoring system.         | Low for teaching use | Add logging and monitoring for future deployment.         | Accepted because production deployment is not required.                    |
 
+Session-only synthetic data and minute-precision local time: SmartCare uses synthetic data stored only during the current session. Appointment times use local time with minute precision. Data is not saved after the application closes.
+Production auth/roles, portal, notifications, billing/insurance, clinical AI exclusions: SmartCare does not include production authentication, user roles, a patient portal, notifications, billing, insurance processing, or clinical AI features. These are outside the undergraduate project scope.
+Scale/concurrency, timezone policy, operations/monitoring, accessibility/usability limitations: SmartCare is designed for a small teaching demonstration. It does not support large-scale concurrent use, advanced timezone management, production monitoring, or a fully accessible graphical interface.
+Difference between accepted scope limit and unresolved required behaviour: Accepted scope limits are features that were not required for this teaching application. Unresolved required behaviour means a required feature does not work correctly. No unresolved required behaviour was identified in the completed local tests, but independent release verification is still pending.
+PG assurance residual risks / owner / status or not applicable: Not applicable. Both group members are undergraduate students, so postgraduate-only assurance requirements do not apply.
 
 ## H Release findings and corrective action
 
-| Requirement/claim | Reproduction/observation | Impact/severity | Owner/action | Corrective diff | Focused/full recheck | Residual limit |
-|---|---|---|---|---|---|---|
-| [response] | [response] | [response] | [response] | [response] | [response] | [response] |
-Justified no-change conclusion if no defect found: [response]
-Release blockers still open / status: [response]
-
+| Requirement/claim             | Reproduction/observation                                                                                      | Impact/severity                 | Owner/action                                  | Corrective diff                   | Focused/full recheck                                      | Residual limit                   |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------|---------------------------------|-----------------------------------------------|-----------------------------------|-----------------------------------------------------------|----------------------------------|
+| Full regression testing       | Ran python -m pytest -q from project/. All 39 tests passed in 0.03s using pytest 8.3.5.                       | No defect found                 | Mohammed Aboset / No correction required      | None                              | Full regression: 39 passed                                | Independent verification pending |
+| Interactive application       | Ran python main.py --interactive and tested the available menu functions. The application worked as expected. | No defect found                 | Mohammed Aboset / No correction required      | None                              | Local interactive testing completed                       | Independent verification pending |
+| README and setup instructions | Updated both README files and successfully installed dependencies from requirements-dev.txt.                  | Documentation updated           | Mohammed Aboset / Updated documentation       | README documentation changes only | Dependency installation succeeded and all 39 tests passed | Fresh-clone verification pending |
+| Release formatting            | Ran git diff --check after correcting trailing whitespace. No further errors appeared.                        | Minor formatting issue resolved | Mohammed Aboset / Removed trailing whitespace | Root README formatting correction | git diff --check passed                                   | None identified                  |
+Justified no-change conclusion if no defect found: No confirmed application defects were found during the completed local release checks. All 39 automated tests passed, and the interactive application worked as expected. Therefore, no application code changes were required. The README files and release documentation were updated to prepare the final release.
+Release blockers still open / status: No confirmed application defects are currently blocking release. Independent fresh-clone verification, Pull Request review and approval, final SHA confirmation, and submission package checks are still pending. The release is not yet approved.
 
 ## I Git review and integration evidence
 
-Issue / PR / diff links and reviewed SHA: [response]
-Independent reviewer / feedback / response: [response]
-Integration commit / full recheck: [response]
-Tracked and untracked file inspection / cleanliness: [response]
-Secrets/staff material/caches/tool-metadata exclusion check: [response]
-Candidate recovery plan / known-good SHA: [response]
-Named substantive contributions: [response]
-
+Issue / PR / diff links and reviewed SHA: Stage 12 release branch: feature/stage12-release. GitHub repository: https://github.com/BigFa1/st1-assignment-3. Release candidate SHA: 0c0e09d6237ea121826efed85fa454806d9c8c07. Pull Request link and final reviewed SHA to be confirmed after review.
+Independent reviewer / feedback / response: Fahad Almajeed (@BigFa1) is the intended independent reviewer. His code review, fresh-clone verification, feedback, and any required corrections are pending.
+Integration commit / full recheck: Stage 12 has not yet been merged into main. The release candidate passed all 39 automated tests using pytest 8.3.5. The final integration SHA and post-merge regression results will be recorded after approval and merging.
+Tracked and untracked file inspection / cleanliness: Git status was checked before committing. Only the root README.md, project/README.md, and stage12/stage12_activities_and_evidence.md were modified. Git diff --check passed. Final working-tree cleanliness after all Stage 12 updates is pending.
+Secrets/staff material/caches/tool-metadata exclusion check: No unexpected files appeared in the earlier git status output. A complete tracked-file and release ZIP inspection is still required to confirm that secrets, private staff material, virtual environments, caches, and unnecessary tool metadata are excluded.
+Candidate recovery plan / known-good SHA: The Stage 12 starting commit is 26a6195ac76a66298b98a3e383fb0a6406f2b918. The first Stage 12 release candidate is 0c0e09d6237ea121826efed85fa454806d9c8c07. If a release problem is found, the group can return to a known-good commit, correct the issue on the release branch, and rerun the tests before merging.
+Named substantive contributions: Mohammed Aboset completed Stage 12 local regression testing, interactive testing, README updates, release evidence documentation, and release candidate preparation. Fahad Almajeed contributed to earlier SmartCare development and is responsible for the pending independent release review and verification. Final Stage 12 contributions will be updated after the review.
 
 ## J Human release decision
 
-Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: [response]
-Approver / date / rationale and evidence: [response]
-What risks remain / conditions / owners: [response]
-Can the team explain the system: [response]
-Can a change be recovered: [response]
-Common decision / PG decision where different: [response]
-
+Decision — READY FOR COURSE RELEASE / READY WITH DOCUMENTED LIMITATIONS / NOT YET READY: NOT YET READY. The application passed local testing, but independent verification, final review, and submission checks are still pending.
+Approver / date / rationale and evidence: Pending approval by Mohammed Aboset and Fahad Almajeed. Local evidence includes 39 passing automated tests using pytest 8.3.5, successful interactive testing, and updated release documentation. Final approval date will be recorded after verification.
+What risks remain / conditions / owners: Fahad must complete the independent fresh-clone verification and Pull Request review. Both members must confirm the final release decision. Mohammed will complete the final SHA, release ZIP, and submission checks.
+Can the team explain the system: Mohammed has reviewed the main application components and tested the interactive functions. Both members must confirm they can explain the system during the final viva.
+Can a change be recovered: Yes. Git records previous commits, including the Stage 12 starting SHA 26a6195ac76a66298b98a3e383fb0a6406f2b918. The group can return to a known-good version if necessary and repeat the tests.
+Common decision / PG decision where different: The undergraduate release decision is NOT YET READY until the remaining checks are completed. Postgraduate-only requirements are not applicable because both members are undergraduate students.
 
 ## K Final tested release SHA
 
-Exact common tested SHA: [response]
-Exact PG tested SHA or not applicable: [response]
-Final submitted SHA / repository URL: [response]
-Evidence-only later commit and difference explanation: [response]
-Executable changes after testing and re-verification: [response]
-Source ZIP name / SHA correspondence / extracted comparison: [response]
-
+Exact common tested SHA: 0c0e09d6237ea121826efed85fa454806d9c8c07 was the first Stage 12 release candidate. All 39 automated tests passed locally using pytest 8.3.5. Final candidate testing and independent verification are pending.
+Exact PG tested SHA or not applicable: Not applicable. Both group members are undergraduate students.
+Final submitted SHA / repository URL: Pending final review and merge. Repository: https://github.com/BigFa1/st1-assignment-3
+Evidence-only later commit and difference explanation: Sections G–J were updated after the first release candidate commit. These are documentation changes only. A new commit SHA will be recorded after the remaining evidence is completed.
+Executable changes after testing and re-verification: No executable code changes have been made during Stage 12 so far. All 39 automated tests passed. Final verification will be repeated before submission.
+Source ZIP name / SHA correspondence / extracted comparison: Pending. The final source ZIP will be created from the exact submitted SHA after approval. Its contents will be checked against the final repository commit.
 
 ## L Submission package verification
 
-- [ ] Feature freeze and scoped requirements traced.
-- [ ] Applicable full regressions, integrated demo and invalid paths verified.
+- [x] Feature freeze and scoped requirements traced.
+- [x] Applicable full regressions, integrated demo and invalid paths verified.
 - [ ] Architecture/code quality and final AI/dependency checks complete.
 - [ ] Root README and project/README reproduced by another verifier.
-- [ ] Release notes, technical debt and limitations visible.
+- [x] Release notes, technical debt and limitations visible.
 - [ ] Independent human review, integration and release decision recorded.
 - [ ] Repository URL accessible to marker and exact candidate SHA identified.
 - [ ] One source ZIP from submitted commit with root README.md and .gitignore.
@@ -190,69 +194,66 @@ Source ZIP name / SHA correspondence / extracted comparison: [response]
 - [ ] Mixed-group common protection and candidate upload routing checked.
 - [ ] Group reflection, confidential individual peer forms and common team viva routed separately.
 
-Confirmed assessment item/upload route: [response]
-Deadline/timezone: [response]
-Repository access arrangement: [response]
-Mixed-candidate upload arrangement: [response]
-Oral/video recording/accessibility arrangements: [response]
-Remaining administration or release dependency: [response]
-
+Confirmed assessment item/upload route: Pending confirmation from the University of Canberra submission instructions.
+Deadline/timezone: Pending confirmation from the assessment instructions and Canvas.
+Repository access arrangement: GitHub repository: https://github.com/BigFa1/st1-assignment-3. Stage 12 release branch: feature/stage12-release. Marker access has not yet been confirmed.
+Mixed-candidate upload arrangement: Not applicable to our undergraduate-only group. Final submission route still requires confirmation.
+Oral/video recording/accessibility arrangements: Pending confirmation of the team viva arrangements and any recording or accessibility requirements.
+Remaining administration or release dependency: Fahad must complete independent verification and Pull Request review. Both members must approve the release. The final SHA, source ZIP, submission checklist, group reflection, individual peer forms, and viva preparation must also be completed.
 
 ## M Formative questions
 
-1. What is a release candidate? [response]
+1. What is a release candidate? A release candidate is a version of software that is almost ready for final release. It must pass the final checks before submission.
 
-2. What is feature freeze and why is it used? [response]
+2. What is feature freeze and why is it used? Feature freeze means stopping the addition of new features. It allows the team to focus on testing and fixing problems before release.
 
-3. What is regression testing in a release context? [response]
+3. What is regression testing in a release context? Regression testing checks that existing features still work after changes. In SmartCare, we ran 39 automated tests and all passed.
 
-4. What is a known limitation? [response]
+4. What is a known limitation? A known limitation is something the software cannot currently do. For example, SmartCare does not save data after the application closes.
 
-5. What is technical debt? [response]
+5. What is technical debt? Technical debt is work that may need improvement in the future. For example, SmartCare could use permanent data storage instead of session-only storage.
 
-6. What are release notes? [response]
+6. What are release notes? Release notes explain what the software includes, what was fixed, and what limitations remain.
 
-7. What is software maintenance? [response]
+7. What is software maintenance? Software maintenance means fixing problems, improving features, and keeping software working after release.
 
-8. What is the purpose of the individual demonstration/viva? [response]
+8. What is the purpose of the individual demonstration/viva? The viva checks that each student understands the project and can explain their own contributions, code, testing, and decisions.
 
-9. What should the final responsible-AI check establish before release? [response]
+9. What should the final responsible-AI check establish before release? It should confirm that AI use followed the course rules, AI-assisted work was reviewed and tested by humans, and no private or sensitive information was included.
 
-10. What is the main course conclusion about AI and the role of the software engineer? [response]
-
+10. What is the main course conclusion about AI and the role of the software engineer? AI can help software engineers, but it cannot replace their responsibility. Engineers must understand, test, review, and take responsibility for their work.
 
 ## N Reflection viva and handover
 
-Strongest evidence SmartCare is ready: [response]
-Weakest area: [response]
-How AI use changed from Stage 1 to Stage 12: [response]
-Start doing — engineering and AI use: [response]
-Stop doing — engineering and AI use: [response]
-Continue doing — engineering and AI use: [response]
-What worked / caused rework / future delivery improvement: [response]
-One paragraph — If AI can write code why do we still need software engineers: [response]
+Strongest evidence SmartCare is ready: All 39 automated tests passed using pytest 8.3.5. The interactive application was also tested successfully. The project includes separate domain, service, data storage, and testing components.
+Weakest area: SmartCare only stores data during the current session. It also requires independent fresh-clone verification before the final release decision.
+How AI use changed from Stage 1 to Stage 12: During the project, AI assistance was used where permitted to support development. By Stage 12, the focus was on human review, testing, checking evidence, and confirming that the application worked correctly.
+Start doing — engineering and AI use: Start checking requirements and tests before accepting suggested changes. Record clear evidence for important decisions.
+Stop doing — engineering and AI use: Stop assuming that code is correct simply because it runs or was suggested by AI. Avoid adding unnecessary features near release.
+Continue doing — engineering and AI use: Continue using Git, automated testing, human reviews, and responsible AI practices.
+What worked / caused rework / future delivery improvement: GitHub collaboration and automated testing helped the group manage changes. Earlier debugging and documentation updates required extra work. In future projects, we would review changes earlier and update documentation throughout development.
+One paragraph — If AI can write code why do we still need software engineers: We still need software engineers because writing code is only one part of software development. Engineers must understand user requirements, design solutions, test software, fix problems, and make important decisions. AI can suggest code, but its suggestions may contain mistakes. Software engineers are responsible for checking that the application works correctly, meets requirements, and is safe to use. Human judgement and responsibility remain important even when AI is available.
 
-| Preparation item | Own explanation and evidence link |
-|---|---|
-| Problem and stakeholders | [response] |
-| Two requirements and acceptance criteria | [response] |
-| Domain model and architecture | [response] |
-| Design trade-off | [response] |
-| Meaningful test and its limits / 100 percent coverage | [response] |
-| Diagnosed defect and verification | [response] |
-| Shared store and session-state/query responsibilities | [response] |
-| What would break if session-state lookup/query responsibilities changed? | [response] |
-| Why cancellation is domain behaviour / conflict coordination is service behaviour | [response] |
-| FR-07 retained history test | [response] |
-| Actual AI change rejected/modified or honestly accepted with verification | [response] |
-| Unresolved limitation / future production work | [response] |
-| Personal implementation contribution | [response] |
-| Personal test/review/design/integration contribution | [response] |
-| PG agentic change and rescheduling verification | [response] |
-| PG responsible-AI risk/remediation or supported no finding | [response] |
+| Preparation item                                                                  | Own explanation and evidence link                                                                                                                                                                                                                             |
+|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Problem and stakeholders                                                          | SmartCare helps manage patients, practitioners, and appointments. The main stakeholders are patients, practitioners, and administrative staff. Evidence: project/README.md.                                                                                   |
+| Two requirements and acceptance criteria                                          | Patient search should return the correct patient or report when a patient is not found. Appointment cancellation should update the appointment status and prevent invalid changes. Evidence: stage06/ and project/tests/.                                     |
+| Domain model and architecture                                                     | SmartCare uses classes for patients, practitioners, and appointments. Domain classes manage rules, services coordinate operations, and the data store holds records. Evidence: project/smartcare/domain.py, services.py, and data_store.py.                   |
+| Design trade-off                                                                  | We used in-memory storage because it is simple and suitable for a teaching project. The disadvantage is that records disappear when the program closes.                                                                                                       |
+| Meaningful test and its limits / 100 percent coverage                             | Automated tests check patient search, appointment behaviour, and other application functions. All 39 tests passed. Passing tests does not prove that every possible situation has been tested or that code coverage is 100 percent. Evidence: project/tests/. |
+| Diagnosed defect and verification                                                 | Stage 8 involved identifying and correcting faulty application behaviour. The final integrated application passed all 39 regression tests. Evidence: stage08/ and project/tests/.                                                                             |
+| Shared store and session-state/query responsibilities                             | The shared data store holds patient, practitioner, and appointment records during the session. Services use the store, while queries retrieve information without changing stored records. Evidence: project/smartcare/data_store.py and services.py.         |
+| What would break if session-state lookup/query responsibilities changed?          | Patient searches and appointment queries might return incorrect or inconsistent information. Existing tests could fail because services would no longer use the expected shared records.                                                                      |
+| Why cancellation is domain behaviour / conflict coordination is service behaviour | Cancellation changes the state of an appointment, so its rules belong in the domain model. Services coordinate appointments and check conflicts between records.                                                                                              |
+| FR-07 retained history test                                                       | The retained history test checks that appointment history remains available as required during the session. Evidence: project/tests/. The exact test should be identified during viva preparation.                                                            |
+| Actual AI change rejected/modified or honestly accepted with verification         | A specific GitHub Copilot suggestion and the group's decision must be confirmed from the earlier stage evidence before the viva. No unverified example is claimed here.                                                                                       |
+| Unresolved limitation / future production work                                    | Future improvements would include permanent storage, authentication, user roles, timezone handling, and production monitoring.                                                                                                                                |
+| Personal implementation contribution                                              | Mohammed Aboset contributed to SmartCare development and group activities during earlier stages. Exact implementation evidence should be confirmed using the relevant Git commits and stage records.                                                          |
+| Personal test/review/design/integration contribution                              | Mohammed completed Stage 12 local regression testing, interactive testing, README updates, release documentation, and release candidate preparation. Evidence: stage12/ and commit 0c0e09d6237ea121826efed85fa454806d9c8c07.                                  |
+| PG agentic change and rescheduling verification                                   | Not applicable. Both group members are undergraduate students.                                                                                                                                                                                                |
+| PG responsible-AI risk/remediation or supported no finding                        | Not applicable. Both group members are undergraduate students.                                                                                                                                                                                                |
 
-Optional bounded-change practice only: validation rule, focused test, safe error-message change, explicit-input query or agreed status rule with test. Explain expected impact before editing, make a small change, run the test, and identify evidence to inspect if unsure. No live AI unless explicitly permitted. Preserve the submitted candidate.
-
-Practice question/change and reasoning: [response or not undertaken]
-Separate reflection / peer / common team viva evidence links and routing: [response]
+Optional bounded-change practice only: No additional coding practice has been undertaken during Stage 12. The release candidate will be preserved for final verification.
+Practice question/change and reasoning: Not undertaken. The focus is on final verification and release preparation rather than adding new code.
+Separate reflection / peer / common team viva evidence links and routing: The group reflection, confidential individual peer forms, and common team viva are separate assessment requirements. Their final submission links and arrangements are pending confirmation from the assessment instructions.
 No further coding stage. Later corrections use the published assessment process.
